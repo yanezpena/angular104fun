@@ -1,0 +1,168 @@
+<div class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card card-plain">
+				<div class="card-header">
+					<h1>Update Expense</h1>
+					<p>
+						Update new expense. Use description to relate the expense to place
+					</p>
+
+					<div [hidden]="submitted">
+						<form (ngSubmit)="onSubmit(curForm)" #curForm="ngForm">
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input
+									type="text"
+									class="form-control"
+									id="name"
+									required
+									minlength="12"
+									name="name"
+									[(ngModel)]="expense.name"
+									#name="ngModel"
+								/>
+								<div
+									*ngIf="name.invalid && (name.dirty || name.touched)"
+									class="alert alert-danger"
+								>
+									<div *ngIf="name.errors.required">
+										Name is required.
+									</div>
+									<div *ngIf="name.errors.minlength">
+										Name must be at least 12 characters long.
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">Description</label>
+								<quill-editor
+									type="text"
+									id="description"
+									[styles]="{ height: '200px' }"
+									required
+									maxlength="1000"
+									name="description"
+									[(ngModel)]="expense.description"
+									#description="ngModel"
+								></quill-editor>
+								<div
+									*ngIf="
+										description.invalid &&
+										(description.dirty || description.touched)
+									"
+									class="alert alert-danger"
+								>
+									<div *ngIf="description.errors.required">
+										Description is required.
+									</div>
+									<div *ngIf="description.errors.maxlength">
+										Description must be at less 1000 characters long.
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="name">Date</label>
+								<input
+									type="datetime"
+									class="form-control"
+									id="entrydate"
+									required
+									[(ngModel)]="expense.entryDate"
+									name="entrydate"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="name">SubTotal</label>
+								<input
+									type="number"
+									class="form-control"
+									id="subtotal"
+									required
+									[(ngModel)]="expense.subtotal"
+									name="subtotal"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="name">Total Tax</label>
+								<input
+									type="number"
+									class="form-control"
+									id="totalTax"
+									required
+									[(ngModel)]="expense.totalTax"
+									name="totalTax"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="name">State</label>
+								<app-select
+									id="state"
+									name="state"
+									semanticClass="form-control"
+									[(ngModel)]="expense.state"
+									[optionList]="stateOptions"
+									toolTipMessage="Select Expense State"
+									[disabled]="false"
+									required
+								>
+								</app-select>
+							</div>
+
+							<div class="form-group">
+								<div *ngIf="expense.image && expense.image !== null">
+									<img
+										[src]="expense.image"
+										width="25%"
+										height="25%"
+										[alt]="expense.name"
+									/>
+								</div>
+								<div>
+									<input
+										#inputControl
+										type="file"
+										accept="image/*"
+										name="receipt"
+										(change)="onFileSelected($event)"
+										ngModel
+									/>
+									<button
+										type="button"
+										class="btn btn-success"
+										(click)="inputControl.click()"
+									>
+										Upload a Receipt
+									</button>
+								</div>
+							</div>
+
+							<!-- buttons -->
+							<div class="form-group">
+								<button
+									type="submit"
+									[disabled]="curForm.pristine"
+									class="btn btn-success"
+								>
+									Save
+								</button>
+								<button
+									type="submit"
+									(click)="onCancel()"
+									class="btn btn-warning"
+								>
+									Cancel
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

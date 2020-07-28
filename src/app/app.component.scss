@@ -1,0 +1,59 @@
+body {
+	margin: 0px;
+}
+
+.autocomplete-form {
+	min-width: 150px;
+	max-width: 500px;
+	width: 100%;
+}
+
+.pokemon-option {
+	display: flex;
+	align-items: center;
+}
+
+.pokemon-option img {
+	width: 48px;
+	height: 48px;
+}
+
+.example-section {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	height: 60px;
+}
+
+.example-margin {
+	margin: 0 10px;
+}
+
+.example-radio-group {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+.example-radio-button {
+	margin: 5px;
+}
+
+.example-chip-list {
+	width: 100%;
+}
+
+.example-container {
+	border: 1px solid #555;
+}
+
+mat-drawer-content {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.example-spacer {
+	flex: 1 1 auto;
+}
