@@ -1,0 +1,19 @@
+<!-- header -->
+<app-header
+	(toggleSidebar)="sidebarToggler()"
+	(languageChanged)="onLanguageChanged($event)"
+></app-header>
+
+<mat-drawer-container>
+	<mat-drawer mode="side" [opened]="sidebarOpen">
+		<!-- sidebar -->
+		<app-sidebar></app-sidebar>
+	</mat-drawer>
+
+	<mat-drawer-content>
+		<router-outlet></router-outlet>
+	</mat-drawer-content>
+</mat-drawer-container>
+
+<!-- footer -->
+<app-footer></app-footer>

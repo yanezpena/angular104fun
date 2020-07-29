@@ -8,29 +8,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// components
-import { InputAutocompleteComponent } from './components/input-autocomplete/input-autocomplete.component';
-import { SelectLanguageComponent } from './components/select-language/select-language.component';
-
 // translate
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-// app config
-import { AppConfigService } from './shared/app-config.service';
+// component module
+import { ComponentModule } from './components/components.module';
+import { DefaultModule } from './layouts/default/default.module';
 
-// loading and spining
+// app config service
+import { AppConfigService } from './shared/app-config.service';
+// loading and spining service
 import { LoadingService } from './shared/loading.service';
-import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		InputAutocompleteComponent,
-		SelectLanguageComponent,
-		LoadingSpinnerComponent,
-	],
+	declarations: [AppComponent],
 	imports: [
 		HttpClientModule,
 		BrowserModule,
@@ -46,6 +39,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 				deps: [HttpClient],
 			},
 		}),
+		ComponentModule,
+		DefaultModule,
 	],
 	providers: [
 		{

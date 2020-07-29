@@ -12,7 +12,9 @@ export class SelectLanguageComponent implements OnInit {
 	@Input() defaultValue: string = 'en';
 
 	// output events
-	@Output() languageChange: EventEmitter<string> = new EventEmitter<string>();
+	@Output() languageChanged: EventEmitter<string> = new EventEmitter<
+		string
+	>();
 
 	languages: Language[] = languages;
 
@@ -26,6 +28,6 @@ export class SelectLanguageComponent implements OnInit {
 	}
 
 	onChange(event) {
-		this.languageChange.emit(event.value);
+		this.languageChanged.emit(event.value);
 	}
 }

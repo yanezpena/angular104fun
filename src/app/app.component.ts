@@ -197,8 +197,4 @@ export class AppComponent {
 		h.test(window.location.host)
 	);
 
-	onLanguageChange(lang: string) {
-		console.log('onLanguageChange', lang);
-		this.translate.use(lang);
-	}
 }
