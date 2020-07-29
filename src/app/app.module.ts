@@ -18,9 +18,9 @@ import { ComponentModule } from './components/components.module';
 import { DefaultModule } from './layouts/default/default.module';
 
 // app config service
-import { AppConfigService } from './shared/app-config.service';
+import { AppConfigService } from './shared/services/app-config.service';
 // loading and spining service
-import { LoadingService } from './shared/loading.service';
+import { LoadingService } from './shared/services/loading.service';
 
 @NgModule({
 	declarations: [AppComponent],
