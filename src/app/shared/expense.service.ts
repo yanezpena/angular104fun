@@ -24,7 +24,6 @@ export class ExpenseService {
 	}
 
 	getExpense(id: string) {
-		// console.log("expense id", id);
 		return this.http.get<IExpense>(`${this.baseUrl}/${id}`);
 	}
 
@@ -61,18 +60,4 @@ export class ExpenseService {
 		console.log("deleteExpenseImage", `${this.abaseUrl}/${id}`);
 		return this.http.delete(`${this.abaseUrl}/${id}`);
 	}
-	// uploadReceipt(receipt: FormData) {
-	// 	this.http
-	// 		.post(this.baseUrl, receipt, {
-	// 			reportProgress: true,
-	// 			observe: "events"
-	// 		})
-	// 		.subscribe(event => {
-	// 			if (event.type === HttpEventType.UploadProgress){
-	// 				console.log(Math.round(event.total/event.loaded * 100) + '%')
-	// 			} else if (event.type === HttpEventType.Response){
-	// 				console.log(event);
-	// 			}
-	// 		});
-	// }
 }

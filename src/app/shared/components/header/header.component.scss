@@ -1,3 +1,16 @@
+@import '../../../../assets/css/variables.scss';
+
+.app-title {
+	padding-left: 10px;
+	font-size: 24px;
+	font-variant: small-caps;
+}
+
+.app-title-icon {
+	font-size: 26px;
+	color: $app-title-icon-color;
+}
+
 ul li {
 	list-style: none;
 }

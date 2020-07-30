@@ -26,7 +26,7 @@
 		<mat-icon>share</mat-icon>
 	</button>
 	<app-select-language
-		(languageChanged)="onLanguageChange($event)"
+		(languageChange)="onLanguageChange($event)"
 	></app-select-language>
 	<button mat-icon-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>

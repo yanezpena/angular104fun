@@ -1,7 +1,7 @@
-import { ExpenseService } from "../../../shared/expense.service";
-import { StateOptionService } from "../../../shared/state-option.service";
+import { ExpenseService } from "../../shared/expense.service";
+import { StateOptionService } from "../../shared/state-option.service";
 
-import { Expense } from "../../../models/Expense";
+import { Expense } from "../../models/Expense";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { v4 as uuid } from "uuid";

@@ -1,7 +1,32 @@
+@import '../../../../assets/css/variables.scss';
+
 :host {
+	.mat-toolbar-row {
+		height: $footer-height;
+	}
+
 	.mat-toolbar {
 		p {
-			font-size: 12px;
+			font-size: $standard-font-size;
+		}
+
+		a {
+			padding-left: 5px;
+			font-size: $standard-font-size;
+			text-transform: uppercase;
+		}
+
+		a:link {
+			color: $link-font-color;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-decoration: underline dotted $standard-font-color;
+		}
+
+		a:visited {
+			color: $visited-font-color;
 		}
 	}
 }

@@ -10,6 +10,7 @@ import { AppRoutingModule } from '../app-routing.module';
 // components
 import { InputAutocompleteComponent } from '../components/input-autocomplete/input-autocomplete.component';
 import { SelectLanguageComponent } from '../components/select-language/select-language.component';
+import { SamllButtonComponent } from '../components/small-button/small-button.component';
 
 // loading and spining
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
@@ -20,6 +21,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		InputAutocompleteComponent,
 		SelectLanguageComponent,
 		LoadingSpinnerComponent,
+		SamllButtonComponent,
 	],
 	imports: [
 		CommonModule,
@@ -36,6 +38,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		InputAutocompleteComponent,
 		SelectLanguageComponent,
 		LoadingSpinnerComponent,
+		SamllButtonComponent,
 	],
 	providers: [TranslateService],
 })

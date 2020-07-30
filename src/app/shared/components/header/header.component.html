@@ -1,39 +1,30 @@
 <mat-toolbar>
 	<mat-toolbar-row>
-		<!-- rigth icons -->
-		<div>
+		<!-- right icons -->
+		<div fxFlex fxLayoutAlign="start center">
 			<button mat-icon-button (click)="setSidebar()">
 				<mat-icon matTooltip="Open/Close Slide Menu">menu</mat-icon>
 			</button>
-			<span style="padding: 10px 0px 10px 10px;">{{
-				'app_title' | translate
-			}}</span>
-			<mat-icon
-				style="
-					font-size: 26px;
-					font-weight: bold;
-					color: rgb(255, 175, 0);
-				"
-				>attach_money</mat-icon
-			>
+			<span class="app-title">{{ 'app_title' | translate }}</span>
+			<mat-icon class="app-title-icon">attach_money</mat-icon>
 		</div>
 
-		<!-- spacer -->
-		<span style="flex: 1 1 auto;"></span>
-
 		<!-- left icons and menu -->
-		<div>
+		<div fxFlex fxLayoutAlign="end center">
+			<button mat-icon-button>
+				<mat-icon
+					[matBadge]="numberOfNotifications"
+					matBadgeColor="warn"
+					>notifications</mat-icon
+				>
+			</button>
 			<button mat-icon-button matTooltip="Log In">
 				<mat-icon>person</mat-icon>
 			</button>
 			<button mat-icon-button matTooltip="Sign In">
 				<mat-icon>person_add</mat-icon>
 			</button>
-			<button mat-icon-button>
-				<mat-icon matBadge="15" matBadgeColor="warn"
-					>notifications</mat-icon
-				>
-			</button>
+
 			<button mat-icon-button>
 				<mat-icon>favorite</mat-icon>
 			</button>

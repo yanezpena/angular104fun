@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
@@ -13,14 +12,21 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+// app
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
 // component module
 import { ComponentModule } from './components/components.module';
 import { DefaultModule } from './layouts/default/default.module';
 
 // app config service
 import { AppConfigService } from './shared/services/app-config.service';
+
 // loading and spining service
 import { LoadingService } from './shared/services/loading.service';
+import { NotificationService } from './shared/services/notification.service';
+import { ExpenseService } from './shared/expense.service';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -39,6 +45,7 @@ import { LoadingService } from './shared/services/loading.service';
 				deps: [HttpClient],
 			},
 		}),
+		ToastrModule.forRoot(),
 		ComponentModule,
 		DefaultModule,
 	],
@@ -54,6 +61,8 @@ import { LoadingService } from './shared/services/loading.service';
 			multi: true,
 		},
 		LoadingService,
+		NotificationService,
+		ExpenseService,
 	],
 	bootstrap: [AppComponent],
 })

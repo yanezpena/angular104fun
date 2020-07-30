@@ -7,10 +7,17 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MaterialModule } from '../material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentModule } from '../components/components.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
 	declarations: [HeaderComponent, FooterComponent, SidebarComponent],
-	imports: [CommonModule, MaterialModule, TranslateModule, ComponentModule],
+	imports: [
+		CommonModule,
+		MaterialModule,
+		TranslateModule,
+		ComponentModule,
+		AppRoutingModule,
+	],
 	exports: [HeaderComponent, FooterComponent, SidebarComponent],
 })
 export class SharedModule {}

@@ -1,3 +1,5 @@
+@import '../../../../assets/css/variables.scss';
+
 :host {
 	.mat-icon {
 		vertical-align: middle;
@@ -11,6 +13,12 @@
 			width: 140px;
 			height: 130px;
 			object-fit: fill;
+		}
+	}
+
+	mat-nav-list {
+		a {
+			font-size: $standard-font-size;
 		}
 	}
 }

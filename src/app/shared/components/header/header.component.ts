@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
 	@Output() toggleSidebar: EventEmitter<any> = new EventEmitter();
 	@Output() languageChanged: EventEmitter<string> = new EventEmitter();
 
+	numberOfNotifications: number = 22;
 	constructor() {}
 
 	ngOnInit(): void {}
