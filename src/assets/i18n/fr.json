@@ -2,5 +2,9 @@
 	"app_title": "Expenses(FR)",
 	"select_language": "Select a Language(FR)",
 	"delete_message_box_question": "Do you want to delete this record?(FR)",
-	"delete_message_box_tittle": "Confirm Deletion(FR)"
+	"delete_message_box_tittle": "Confirm Deletion(FR)",
+	"yes": "Yes(FR)",
+	"no": "No(FR)",
+	"ok": "Ok(FR)",
+	"cancel": "Cancel(FR)"
 }
