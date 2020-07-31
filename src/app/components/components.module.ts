@@ -12,6 +12,7 @@ import { InputAutocompleteComponent } from '../components/input-autocomplete/inp
 import { SelectLanguageComponent } from '../components/select-language/select-language.component';
 import { SamllButtonComponent } from '../components/small-button/small-button.component';
 import { MessageDialogComponent } from '../components/message-dialog/message-dialog.component';
+import { StateFieldComponent } from '../components/state-field/state-field.component';
 
 // loading and spining
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
@@ -24,6 +25,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		LoadingSpinnerComponent,
 		SamllButtonComponent,
 		MessageDialogComponent,
+		StateFieldComponent,
 	],
 	imports: [
 		CommonModule,
@@ -42,6 +44,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		LoadingSpinnerComponent,
 		SamllButtonComponent,
 		MessageDialogComponent,
+		StateFieldComponent,
 	],
 	providers: [TranslateService],
 })

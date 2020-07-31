@@ -26,6 +26,9 @@ import { AppConfigService } from './shared/services/app-config.service';
 // loading and spining service
 import { LoadingService } from './shared/services/loading.service';
 import { NotificationService } from './shared/services/notification.service';
+
+// services
+import { StateOptionService } from './shared/state-option.service';
 import { ExpenseService } from './shared/expense.service';
 
 @NgModule({
@@ -63,6 +66,7 @@ import { ExpenseService } from './shared/expense.service';
 		LoadingService,
 		NotificationService,
 		ExpenseService,
+		StateOptionService,
 	],
 	bootstrap: [AppComponent],
 })

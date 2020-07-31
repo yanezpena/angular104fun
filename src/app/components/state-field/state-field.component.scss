@@ -1,0 +1,25 @@
+@import '../../../assets/css/variables.scss';
+
+.small-font-state-text {
+	font-size: 70%;
+}
+
+.draft-state-color {
+	color: $draft-state-color;
+}
+
+.active-state-color {
+	color: $active-state-color;
+}
+
+.approved-state-color {
+	color: $approved-state-color;
+}
+
+.done-state-color {
+	color: $done-state-color;
+}
+
+.reconciled-state-color {
+	color: $reconciled-state-color;
+}
