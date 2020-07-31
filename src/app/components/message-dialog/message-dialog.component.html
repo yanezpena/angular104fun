@@ -1,0 +1,83 @@
+<mat-card>
+	<mat-card-title> {{ data.title }}</mat-card-title>
+	<mat-card-content fxLayoutAlign="none center" fxLayoutGap="20px">
+		<!-- icon -->
+		<div fxFlex [ngSwitch]="iconType">
+			<mat-icon *ngSwitchCase="'info'">info</mat-icon>
+			<mat-icon *ngSwitchCase="'question'">pan_tool</mat-icon>
+			<mat-icon *ngSwitchCase="'none'">warning</mat-icon>
+			<mat-icon *ngSwitchCase="''">warning</mat-icon>
+			<mat-icon *ngSwitchCase="'exclamation'">error_outline</mat-icon>
+		</div>
+		<!-- info -->
+		<div fxLayout="column" fxLayoutGap="10px">
+			<div>
+				<div [innerHTML]="data.message"></div>
+			</div>
+			<div *ngIf="data.information !== ''">
+				<div>{{ data.information }}</div>
+			</div>
+		</div>
+	</mat-card-content>
+	<!-- buttons -->
+	<mat-card-actions>
+		<!-- ok -->
+		<button
+			*ngIf="button == 0"
+			mat-raised-button
+			color="primary"
+			cdkFocusInitial
+			(click)="onOk()"
+			tabindex="-1"
+		>
+			{{ 'OK' | translate }}
+		</button>
+		<!-- ok cancel -->
+		<div
+			fxLayout="row"
+			fxLayoutAlign="space-around center"
+			*ngIf="button == 1"
+		>
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="onOk()"
+				cdkFocusInitial
+			>
+				{{ 'OK' | translate }}
+			</button>
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="onCancel()"
+				tabindex="-1"
+			>
+				{{ 'CANCEL' | translate }}
+			</button>
+		</div>
+		<!-- yes no -->
+		<div
+			fxLayout="row"
+			fxLayoutAlign="space-around center"
+			*ngIf="button == 2"
+		>
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="onYes()"
+				cdkFocusInitial
+				tabindex="-1"
+			>
+				{{ 'YES' | translate }}
+			</button>
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="onNo()"
+				tabindex="-1"
+			>
+				{{ 'NO' | translate }}
+			</button>
+		</div>
+	</mat-card-actions>
+</mat-card>

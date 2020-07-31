@@ -1,4 +1,6 @@
 {
 	"app_title": "Gastos",
-	"select_language": "Seleccione un Idioma"
+	"select_language": "Seleccione un Idioma",
+	"delete_message_box_question": "Ud desea borrar este registro?",
+	"delete_message_box_tittle":"Confirm Borrado"
 }
