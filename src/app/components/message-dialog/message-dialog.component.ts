@@ -36,12 +36,15 @@ export class MessageDialogComponent implements OnInit {
 	onOk() {
 		this.dialogRef.close({ result: MessageResult.Ok });
 	}
+
 	onCancel() {
 		this.dialogRef.close({ result: MessageResult.Cancel });
 	}
+
 	onYes() {
 		this.dialogRef.close({ result: MessageResult.Yes });
 	}
+
 	onNo() {
 		this.dialogRef.close({ result: MessageResult.No });
 	}
