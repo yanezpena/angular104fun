@@ -1,0 +1,8 @@
+<button
+	mat-raised-button
+	[color]="color"
+	matTooltip="{{ textTooltip | translate }}"
+>
+	<mat-icon [ngClass]="ngIconClass">{{ icon }}</mat-icon
+	><span class="span-text-button">{{ text | translate }}</span>
+</button>

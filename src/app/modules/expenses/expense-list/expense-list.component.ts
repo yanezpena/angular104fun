@@ -114,11 +114,11 @@ export class ExpenseListComponent implements OnInit {
 	}
 
 	add() {
-		this.router.navigate(['expense-add']);
+		this.router.navigate(['expense-form']);
 	}
 
 	update(id: string) {
-		this.router.navigate(['expense-update', { id: id }]);
+		this.router.navigate(['expense-form', { id: id }]);
 	}
 
 	changeValue(id: number, property: string, event: any) {

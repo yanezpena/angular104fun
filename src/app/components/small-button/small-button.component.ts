@@ -43,7 +43,6 @@ export class SamllButtonComponent implements OnInit {
 	}
 	set ngClass(ngClass) {
 		this._ngClass = ngClass;
-		console.log(this._ngClass);
 	}
 	public _ngClass = '';
 

@@ -1,0 +1,169 @@
+<section>
+	<mat-card>
+		<mat-card-title>
+			<div fxLayout="row" fxLayout.sm="column">
+				{{ getTitle() }}
+			</div>
+		</mat-card-title>
+		<mat-card-content class="mat-elevation-z8">
+			<form [formGroup]="curForm">
+				<!-- name field -->
+				<div>
+					<mat-form-field>
+						<mat-label>{{ 'name' | translate }}</mat-label>
+						<input
+							matInput
+							placeholder="{{ 'name_placeholder' | translate }}"
+							type="text"
+							formControlName="name"
+							required
+						/>
+						<mat-error>
+							{{ 'name_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+					<!-- description field -->
+					<mat-form-field>
+						<mat-label>{{ 'description' | translate }}</mat-label>
+						<input
+							matInput
+							placeholder="{{
+								'description_placeholder' | translate
+							}}"
+							type="text"
+							formControlName="description"
+							required
+						/>
+						<mat-error>
+							{{ 'description_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+					<!-- state field -->
+					<mat-form-field>
+						<mat-label>{{ 'state' | translate }}</mat-label>
+						<mat-select formControlName="state" required>
+							<mat-option
+								*ngFor="let item of stateOptions"
+								[value]="item.id"
+								>{{ item.id | translate }}</mat-option
+							>
+						</mat-select>
+						<mat-error>
+							{{ 'state_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+					<!-- entryDate field -->
+					<mat-form-field>
+						<mat-label>{{ 'entryDate' | translate }}</mat-label>
+						<input
+							matInput
+							[matDatepicker]="picker"
+							placeholder="{{
+								'entryDate_placeholder' | translate
+							}}"
+							formControlName="entryDate"
+							required
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="picker"
+						></mat-datepicker-toggle>
+						<mat-datepicker #picker></mat-datepicker>
+						<mat-error>
+							{{ 'entryDate_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+					<!-- updateDate field -->
+					<!-- subtotal field -->
+					<div>
+						<mat-form-field>
+							<mat-label>{{ 'subtotal' | translate }}</mat-label>
+							<input
+								matInput
+								placeholder="{{
+									'subtotal_placeholder' | translate
+								}}"
+								type="number"
+								formControlName="subtotal"
+								required
+							/>
+							<mat-error>
+								{{ 'subtotal_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+						<!-- totalTax field -->
+						<mat-form-field>
+							<mat-label>{{ 'totalTax' | translate }}</mat-label>
+							<input
+								matInput
+								placeholder="{{
+									'totalTax_placeholder' | translate
+								}}"
+								type="number"
+								formControlName="totalTax"
+								required
+							/>
+							<mat-error>
+								{{ 'totalTax_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+						<!-- total field -->
+						<mat-form-field>
+							<mat-label>{{ 'total' | translate }}</mat-label>
+							<input
+								matInput
+								placeholder="{{
+									'total_placeholder' | translate
+								}}"
+								type="number"
+								formControlName="total"
+								required
+							/>
+							<mat-error>
+								{{ 'total_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+					</div>
+					<!-- actions buttons -->
+					<div>
+						<app-icon-text-button
+							color="primary"
+							textTooltip="save_button_tooltip"
+							icon="save"
+							text="save"
+						>
+						</app-icon-text-button>
+						<app-icon-text-button
+							textTooltip="cancel_button_tooltip"
+							icon="cancel"
+							text="cancel"
+						>
+						</app-icon-text-button>
+						<app-icon-text-button
+							textTooltip="approve_button_tooltip"
+							icon="thumb_up"
+							[ngIconClass]="'approve-small-button-color'"
+							text="approve"
+						>
+						</app-icon-text-button>
+						<app-small-button
+							imageCaption="edit"
+							toolTipMessage="Update this Expense"
+							[ngClass]="'edit-small-button-color'"
+						></app-small-button>
+						<app-small-button
+							imageCaption="delete"
+							toolTipMessage="Delete this Expense"
+							[ngClass]="'delete-small-button-color'"
+						></app-small-button>
+						<app-small-button
+							imageCaption="thumb_up"
+							toolTipMessage="Approve this Expense"
+							[ngClass]="'approve-small-button-color'"
+						></app-small-button>
+					</div>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</section>

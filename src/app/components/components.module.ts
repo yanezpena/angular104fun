@@ -13,6 +13,7 @@ import { SelectLanguageComponent } from '../components/select-language/select-la
 import { SamllButtonComponent } from '../components/small-button/small-button.component';
 import { MessageDialogComponent } from '../components/message-dialog/message-dialog.component';
 import { StateFieldComponent } from '../components/state-field/state-field.component';
+import { IconTextButtonComponent } from '../components/icon-text-button/icon-text-button.component';
 
 // loading and spining
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
@@ -26,6 +27,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		SamllButtonComponent,
 		MessageDialogComponent,
 		StateFieldComponent,
+		IconTextButtonComponent,
 	],
 	imports: [
 		CommonModule,
@@ -45,6 +47,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		SamllButtonComponent,
 		MessageDialogComponent,
 		StateFieldComponent,
+		IconTextButtonComponent,
 	],
 	providers: [TranslateService],
 })

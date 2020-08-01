@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ExpenseListComponent } from './modules/expenses/expense-list/expense-list.component';
+import { ExpenseFormComponent } from './modules/expenses/expense-form/expense-form.component';
 
 const routes: Routes = [
 	{
@@ -16,6 +17,10 @@ const routes: Routes = [
 			{
 				path: 'expenses',
 				component: ExpenseListComponent,
+			},
+			{
+				path: 'expense-form',
+				component: ExpenseFormComponent,
 			},
 		],
 	},
