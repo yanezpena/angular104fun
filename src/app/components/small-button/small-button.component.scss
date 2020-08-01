@@ -1,3 +1,21 @@
-.btn-small{
-    padding: 10px;
+@import '../../../assets/css/variables.scss';
+
+.btn-small {
+	padding: 10px;
+}
+
+.delete-small-button-color {
+	color: $delete-small-button-color;
+}
+
+.edit-small-button-color {
+	color: $edit-small-button-color;
+}
+
+.approved-small-button-color {
+	color: $approved-small-button-color;
+}
+
+.add-small-button-color {
+	color: $add-small-button-color;
 }

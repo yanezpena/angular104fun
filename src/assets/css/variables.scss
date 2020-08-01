@@ -6,16 +6,24 @@ $visited-font-color: #ffaf00;
 /* colors */
 $app-title-icon-color: #ffaf00;
 $confirm-icon-color: #ffaf00;
+
+/* states icon colors */
 $draft-state-color: rgb(255, 255, 255);
-$active-state-color: rgb(216, 86, 0);
-$approved-state-color: rgb(226, 204, 0);
-$done-state-color: rgb(0, 189, 25);
-$reconciled-state-color: rgb(0, 210, 247);
+$active-state-color: rgb(255, 244, 92);
+$approved-state-color: rgb(230, 106, 210);
+$done-state-color: rgb(255, 159, 137);
+$reconciled-state-color: rgb(65, 158, 249);
+
+/* action small button colors */
+$delete-small-button-color: rgb(242, 57, 62);
+$edit-small-button-color: rgb(0,191,154);
+$approved-small-button-color: rgb(230, 106, 210);
+$add-small-button-color: rgb(255,159,137);
 
 /* font sizes */
 $standard-font-size: 14px;
 
-/*footer */
+/* footer */
 $footer-height: 40px;
 
 /* sidebar */

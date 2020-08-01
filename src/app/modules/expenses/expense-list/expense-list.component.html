@@ -8,6 +8,7 @@
 				<app-small-button
 					imageCaption="add"
 					toolTipMessage="Add new Expense"
+					[ngClass]="'add-small-button-color'"
 					(click)="add()"
 				></app-small-button>
 				<app-small-button
@@ -104,16 +105,19 @@
 						<app-small-button
 							imageCaption="edit"
 							toolTipMessage="Update this Expense"
+							[ngClass]="'edit-small-button-color'"
 							(click)="update(record)"
 						></app-small-button>
 						<app-small-button
 							imageCaption="delete"
 							toolTipMessage="Delete this Expense"
+							[ngClass]="'delete-small-button-color'"
 							(click)="remove(record)"
 						></app-small-button>
 						<app-small-button
-							imageCaption="check"
+							imageCaption="thumb_up"
 							toolTipMessage="Approve this Expense"
+							[ngClass]="'approved-small-button-color'"
 						></app-small-button>
 					</td>
 				</ng-container>

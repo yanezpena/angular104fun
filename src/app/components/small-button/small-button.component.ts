@@ -36,6 +36,17 @@ export class SamllButtonComponent implements OnInit {
 	}
 	public _imageCaption = 'home';
 
+	// input image caption property
+	@Input()
+	get ngClass() {
+		return this._ngClass;
+	}
+	set ngClass(ngClass) {
+		this._ngClass = ngClass;
+		console.log(this._ngClass);
+	}
+	public _ngClass = '';
+
 	constructor() {}
 
 	ngOnInit() {}
