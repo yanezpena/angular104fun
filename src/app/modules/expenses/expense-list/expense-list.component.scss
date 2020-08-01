@@ -1,3 +1,5 @@
+@import '../../../../assets/css/variables.scss';
+
 table {
 	width: 100%;
 }
@@ -10,4 +12,9 @@ table {
 }
 .column-align-right {
 	text-align: right;
+}
+
+th.mat-header-cell {
+	font-size: $standard-font-size;
+	font-weight: bold;
 }

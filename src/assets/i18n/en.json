@@ -1,5 +1,6 @@
 {
-	"app_title": "Expenses",
+	"version": "1.0.0",
+	"app_title": "pyExpenses",
 	"select_language": "Select a Language",
 	"delete_message_box_question": "Do you want to <i>delete</i> this record?",
 	"delete_message_box_tittle": "Confirm Deletion",
@@ -12,5 +13,5 @@
 	"active": "Active",
 	"done": "Done",
 	"approved": "Approved",
-	"reconciled":"Reconciled"
+	"reconciled": "Reconciled"
 }

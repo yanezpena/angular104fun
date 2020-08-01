@@ -1,4 +1,5 @@
 {
+	"version": "1.0.0",
 	"app_title": "Gastos",
 	"select_language": "Seleccione un Idioma",
 	"delete_message_box_question": "Ud desea borrar este registro?",
