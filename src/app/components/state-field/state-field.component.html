@@ -1,10 +1,10 @@
-<div>
+<div matTooltip="{{ state.id | translate }}">
 	<div>
 		<mat-icon [ngClass]="state.color">{{ state.icon }}</mat-icon>
 	</div>
 	<div>
 		<div class="small-font-state-text">
-			<strong>{{ state.displayName }}</strong>
+			<strong>{{ state.id | translate }}</strong>
 		</div>
 	</div>
 </div>

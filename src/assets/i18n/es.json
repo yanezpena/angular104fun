@@ -7,5 +7,10 @@
 	"no": "No",
 	"ok": "Ok",
 	"cancel": "Cancelar",
-	"close": "Cerrar"
+	"close": "Cerrar",
+	"draft": "Borrador",
+	"active": "Activo",
+	"done": "Terminado",
+	"approved": "Aprobado",
+	"reconciled": "Reconciliado"
 }

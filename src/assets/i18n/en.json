@@ -7,5 +7,10 @@
 	"no": "No",
 	"ok": "Ok",
 	"cancel": "Cancel",
-	"close": "Close"
+	"close": "Close",
+	"draft": "Draft",
+	"active": "Active",
+	"done": "Done",
+	"approved": "Approved",
+	"reconciled":"Reconciled"
 }
