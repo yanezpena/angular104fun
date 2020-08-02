@@ -2,81 +2,120 @@
 	<mat-card>
 		<mat-card-title>
 			<div fxLayout="row" fxLayout.sm="column">
-				{{ getTitle() }}
+				{{ 'update_expense_title' | translate }}
 			</div>
 		</mat-card-title>
+		<mat-card-subtitle>
+			<span
+				><i>{{ 'update_expense_subtitle' | translate }}</i></span
+			>
+		</mat-card-subtitle>
 		<mat-card-content class="mat-elevation-z8">
 			<form [formGroup]="curForm">
-				<!-- name field -->
-				<div>
-					<mat-form-field>
-						<mat-label>{{ 'name' | translate }}</mat-label>
-						<input
-							matInput
-							placeholder="{{ 'name_placeholder' | translate }}"
-							type="text"
-							formControlName="name"
-							required
-						/>
-						<mat-error>
-							{{ 'name_is_required' | translate }}
-						</mat-error>
-					</mat-form-field>
-					<!-- description field -->
-					<mat-form-field>
-						<mat-label>{{ 'description' | translate }}</mat-label>
-						<input
-							matInput
-							placeholder="{{
-								'description_placeholder' | translate
-							}}"
-							type="text"
-							formControlName="description"
-							required
-						/>
-						<mat-error>
-							{{ 'description_is_required' | translate }}
-						</mat-error>
-					</mat-form-field>
-					<!-- state field -->
-					<mat-form-field>
-						<mat-label>{{ 'state' | translate }}</mat-label>
-						<mat-select formControlName="state" required>
-							<mat-option
-								*ngFor="let item of stateOptions"
-								[value]="item.id"
-								>{{ item.id | translate }}</mat-option
+				<div class="form-padding">
+					<!-- name field -->
+					<div fxLayout="column" fxLayoutAlign="stretch">
+						<mat-form-field fxFlex floatLabel="always">
+							<mat-label>{{ 'name' | translate }}</mat-label>
+							<input
+								matInput
+								placeholder="{{
+									'name_placeholder' | translate
+								}}"
+								type="text"
+								formControlName="name"
+								#name
+								required
+							/>
+							<button
+								mat-button
+								*ngIf="name.value"
+								matSuffix
+								mat-icon-button
+								(click)="name.value = ''"
+								matTooltip="Clear content"
 							>
-						</mat-select>
-						<mat-error>
-							{{ 'state_is_required' | translate }}
-						</mat-error>
-					</mat-form-field>
-					<!-- entryDate field -->
-					<mat-form-field>
-						<mat-label>{{ 'entryDate' | translate }}</mat-label>
-						<input
-							matInput
-							[matDatepicker]="picker"
-							placeholder="{{
-								'entryDate_placeholder' | translate
-							}}"
-							formControlName="entryDate"
-							required
-						/>
-						<mat-datepicker-toggle
-							matSuffix
-							[for]="picker"
-						></mat-datepicker-toggle>
-						<mat-datepicker #picker></mat-datepicker>
-						<mat-error>
-							{{ 'entryDate_is_required' | translate }}
-						</mat-error>
-					</mat-form-field>
+								<mat-icon>close</mat-icon>
+							</button>
+							<mat-error>
+								{{ 'name_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+
+						<!-- description field -->
+						<mat-form-field
+							fxFlex="grow"
+							floatLabel="always"
+							class="textarea-height"
+						>
+							<mat-label>{{
+								'description' | translate
+							}}</mat-label>
+							<textarea
+								matInput
+								placeholder="{{
+									'description_placeholder' | translate
+								}}"
+								type="text"
+								formControlName="description"
+								required
+							></textarea>
+							<mat-error>
+								{{ 'description_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+					</div>
+
+					<div
+						fxLayoutAlign="space-between center"
+						fxLayoutGap="20px"
+					>
+						<!-- state field -->
+						<mat-form-field fxFlex floatLabel="always">
+							<mat-label>{{ 'state' | translate }}</mat-label>
+							<mat-select formControlName="state" required>
+								<mat-option
+									*ngFor="let item of stateOptions"
+									[value]="item.id"
+									>{{ item.id | translate }}</mat-option
+								>
+							</mat-select>
+							<mat-error>
+								{{ 'state_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+
+						<!-- entryDate field -->
+						<mat-form-field fxFlex floatLabel="always">
+							<mat-label>{{ 'entryDate' | translate }}</mat-label>
+							<input
+								matInput
+								[matDatepicker]="picker"
+								placeholder="{{
+									'entryDate_placeholder' | translate
+								}}"
+								formControlName="entryDate"
+								required
+							/>
+							<mat-datepicker-toggle
+								matSuffix
+								[for]="picker"
+							></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+							<mat-error>
+								{{ 'entryDate_is_required' | translate }}
+							</mat-error>
+						</mat-form-field>
+					</div>
+
 					<!-- updateDate field -->
-					<!-- subtotal field -->
-					<div>
-						<mat-form-field>
+
+					<div
+						fxLayoutAlign="space-between center"
+						fxLayoutGap="20px"
+					>
+						<!-- subtotal field -->
+						<mat-form-field fxFlex floatLabel="always">
 							<mat-label>{{ 'subtotal' | translate }}</mat-label>
 							<input
 								matInput
@@ -91,8 +130,9 @@
 								{{ 'subtotal_is_required' | translate }}
 							</mat-error>
 						</mat-form-field>
+
 						<!-- totalTax field -->
-						<mat-form-field>
+						<mat-form-field fxFlex floatLabel="always">
 							<mat-label>{{ 'totalTax' | translate }}</mat-label>
 							<input
 								matInput
@@ -107,8 +147,9 @@
 								{{ 'totalTax_is_required' | translate }}
 							</mat-error>
 						</mat-form-field>
+
 						<!-- total field -->
-						<mat-form-field>
+						<mat-form-field fxFlex floatLabel="always">
 							<mat-label>{{ 'total' | translate }}</mat-label>
 							<input
 								matInput
@@ -124,8 +165,13 @@
 							</mat-error>
 						</mat-form-field>
 					</div>
+
 					<!-- actions buttons -->
-					<div>
+					<div
+						fxLayoutAlign="start center"
+						fxLayoutGap="50px"
+						class="action-button-padding-top"
+					>
 						<app-icon-text-button
 							color="primary"
 							textTooltip="save_button_tooltip"
@@ -146,21 +192,6 @@
 							text="approve"
 						>
 						</app-icon-text-button>
-						<app-small-button
-							imageCaption="edit"
-							toolTipMessage="Update this Expense"
-							[ngClass]="'edit-small-button-color'"
-						></app-small-button>
-						<app-small-button
-							imageCaption="delete"
-							toolTipMessage="Delete this Expense"
-							[ngClass]="'delete-small-button-color'"
-						></app-small-button>
-						<app-small-button
-							imageCaption="thumb_up"
-							toolTipMessage="Approve this Expense"
-							[ngClass]="'approve-small-button-color'"
-						></app-small-button>
 					</div>
 				</div>
 			</form>

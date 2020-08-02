@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IExpense } from '../../../models/IExpense';
-import { ExpenseService } from '../../../shared/expense.service';
+import { ExpenseService } from '../../../shared/services/expense.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';

@@ -1,7 +1,10 @@
-<quill-editor
-	[styles]="{ height: '200px' }"
-	(onFocus)="focus($event)"
-	(onEditorChanged)="changedEditor($event)"
-	(onBlur)="blur($event)"
-	(onEditorCreated)="created($event)"
-></quill-editor>
+<div [hidden]="readOnly" class="text-editor-container" #container>
+  <br />
+  <div id="editor" (click)="onTouched()"></div>
+</div>
+<span class="counter" *ngIf="!readOnly && countVisible && maxLength > 0">
+  {{ maxLength - inputLength }}
+</span>
+<div *ngIf="readOnly">
+  <div class="form-rich-editor-readonly-text" [innerHTML]="getHtml()"></div>
+</div>

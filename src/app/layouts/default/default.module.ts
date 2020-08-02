@@ -14,9 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ComponentModule } from 'src/app/components/components.module';
 
 // services
-import { ExpenseService } from '../../shared/expense.service';
+import { ExpenseService } from '../../shared/services/expense.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { StateOptionService } from 'src/app/shared/state-option.service';
+import { StateOptionService } from 'src/app/shared/services/state-option.service';
 
 @NgModule({
 	declarations: [

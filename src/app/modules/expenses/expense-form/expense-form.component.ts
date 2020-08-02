@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Expense } from '../../../models/Expense';
-import { ExpenseService } from '../../../shared/expense.service';
-import { StateOptionService } from '../../../shared/state-option.service';
+import { ExpenseService } from '../../../shared/services/expense.service';
+import { StateOptionService } from '../../../shared/services/state-option.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 
 @Component({
 	selector: 'app-expense-form',
 	templateUrl: './expense-form.component.html',
-	styleUrls: ['./expense-form.component.css'],
+	styleUrls: ['./expense-form.component.scss'],
 })
 export class ExpenseFormComponent implements OnInit {
 	// constants

@@ -28,8 +28,8 @@ import { LoadingService } from './shared/services/loading.service';
 import { NotificationService } from './shared/services/notification.service';
 
 // services
-import { StateOptionService } from './shared/state-option.service';
-import { ExpenseService } from './shared/expense.service';
+import { StateOptionService } from './shared/services/state-option.service';
+import { ExpenseService } from './shared/services/expense.service';
 
 @NgModule({
 	declarations: [AppComponent],

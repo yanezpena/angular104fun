@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StateOptionService, IState } from '../../shared/state-option.service';
+import { StateOptionService, IState } from '../../shared/services/state-option.service';
 
 @Component({
 	selector: 'app-state-field',
