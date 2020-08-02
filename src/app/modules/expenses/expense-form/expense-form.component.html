@@ -14,8 +14,8 @@
 			<form [formGroup]="curForm">
 				<div class="form-padding">
 					<!-- name field -->
-					<div fxLayout="column" fxLayoutAlign="stretch">
-						<mat-form-field fxFlex floatLabel="always">
+					<div fxLayout="row">
+						<mat-form-field fxFlex="grow" floatLabel="always">
 							<mat-label>{{ 'name' | translate }}</mat-label>
 							<input
 								matInput
@@ -41,12 +41,13 @@
 								{{ 'name_is_required' | translate }}
 							</mat-error>
 						</mat-form-field>
+					</div>
 
-						<!-- description field -->
+					<!-- description field -->
+					<div fxLayout="row">
 						<mat-form-field
 							fxFlex="grow"
 							floatLabel="always"
-							class="textarea-height"
 						>
 							<mat-label>{{
 								'description' | translate
@@ -200,7 +201,11 @@
 						<app-icon-text-button
 							color="primary"
 							textTooltip="upload_button_tooltip"
-							[icon]="expense.image && expense.image !== null ? 'attachment':'attach_file'"
+							[icon]="
+								expense.image && expense.image !== null
+									? 'attachment'
+									: 'attach_file'
+							"
 							text="upload_receipt"
 							(click)="inputFile.click()"
 						>

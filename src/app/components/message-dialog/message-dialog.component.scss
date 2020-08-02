@@ -22,3 +22,12 @@ mat-toolbar .mat-icon {
 ::ng-deep.mat-dialog-container {
 	padding: 0px !important;
 }
+
+::ng-deep.mat-toolbar-multiple-rows {
+	min-height: 0px;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+	height: inherit;
+}
