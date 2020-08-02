@@ -29,6 +29,7 @@
 	"description_is_required": "This field is required",
 	"state": "State",
 	"state_is_required": "This field is required",
+	"updateDate": "Latest Update",
 	"entryDate": "Date",
 	"entryDate_is_required": "This field is required",
 	"subtotal": "Subtotal",

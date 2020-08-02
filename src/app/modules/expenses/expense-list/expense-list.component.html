@@ -24,13 +24,17 @@
 			<table mat-table [dataSource]="dataSource">
 				<!-- name Column -->
 				<ng-container matColumnDef="name">
-					<th mat-header-cell *matHeaderCellDef>Name</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'name' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">{{ record.name }}</td>
 				</ng-container>
 
 				<!-- description Column -->
 				<ng-container matColumnDef="description">
-					<th mat-header-cell *matHeaderCellDef>Description</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'description' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						<div [innerHTML]="record.description"></div>
 					</td>
@@ -43,7 +47,7 @@
 						class="column-align-center"
 						*matHeaderCellDef
 					>
-						State
+						{{ 'state' | translate }}
 					</th>
 					<td
 						mat-cell
@@ -56,7 +60,9 @@
 
 				<!-- entryDate Column -->
 				<ng-container matColumnDef="entryDate">
-					<th mat-header-cell *matHeaderCellDef>Entry Date</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'entryDate' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						{{ record.entryDate | date: 'medium' }}
 					</td>
@@ -64,7 +70,9 @@
 
 				<!-- updateDate Column -->
 				<ng-container matColumnDef="updateDate">
-					<th mat-header-cell *matHeaderCellDef>Update Date</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'updateDate' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						{{ record.updateDate | date: 'medium' }}
 					</td>
@@ -72,7 +80,9 @@
 
 				<!-- subtotal Column -->
 				<ng-container matColumnDef="subtotal">
-					<th mat-header-cell *matHeaderCellDef>Sub-Total</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'subtotal' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						{{ record.subtotal | currency }}
 					</td>
@@ -80,7 +90,9 @@
 
 				<!-- totalTax Column -->
 				<ng-container matColumnDef="totalTax">
-					<th mat-header-cell *matHeaderCellDef>Taxes</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'totalTax' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						{{ record.totalTax | currency }}
 					</td>
@@ -88,7 +100,9 @@
 
 				<!-- total Column -->
 				<ng-container matColumnDef="total">
-					<th mat-header-cell *matHeaderCellDef>Total</th>
+					<th mat-header-cell *matHeaderCellDef>
+						{{ 'total' | translate }}
+					</th>
 					<td mat-cell *matCellDef="let record">
 						{{ record.total | currency }}
 					</td>
