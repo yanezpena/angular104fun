@@ -19,3 +19,9 @@ th.mat-header-cell {
 	font-weight: bold;
 	text-transform: uppercase;
 }
+
+tr.mat-header-row,
+tr.mat-row,
+tr.mat-footer-row {
+	height: 65px;
+}
