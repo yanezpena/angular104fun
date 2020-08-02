@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
 	templateUrl: './small-button.component.html',
 	styleUrls: ['./small-button.component.scss'],
 })
-export class SamllButtonComponent implements OnInit {
+export class SmallButtonComponent implements OnInit {
 	// input disable property
 	@Input()
 	get disabled() {

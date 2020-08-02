@@ -169,6 +169,44 @@
 						</mat-form-field>
 					</div>
 
+					<!-- receipt - file -->
+					<div>
+						<div style="padding-top: 10px; padding-bottom: 10px;">
+							<mat-label>Receipt</mat-label>
+						</div>
+						<!-- image preview -->
+						<div *ngIf="expense.image && expense.image !== null">
+							<img
+								[src]="expense.image"
+								width="25%"
+								height="25%"
+								[alt]="expense.name"
+								matTooltip="{{
+									'upload_receipt_tooltip' | translate
+								}}"
+								(click)="inputFile.click()"
+							/>
+						</div>
+						<!-- image input file -->
+						<input
+							#inputFile
+							hidden
+							type="file"
+							accept="image/*"
+							(change)="onFileSelected($event)"
+							formControlName="receipt"
+						/>
+						<!-- upload button -->
+						<app-icon-text-button
+							color="primary"
+							textTooltip="upload_button_tooltip"
+							icon="attachment"
+							text="upload_receipt"
+							(click)="inputFile.click()"
+						>
+						</app-icon-text-button>
+					</div>
+
 					<!-- actions buttons -->
 					<div
 						fxLayoutAlign="start center"

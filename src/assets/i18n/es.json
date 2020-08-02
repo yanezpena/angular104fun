@@ -16,6 +16,14 @@
 	"reconciled": "Reconciliado",
 	"approve": "Aprobar",
 	"save": "Salvar",
+	"add": "Adicionar",
+	"refresh": "Refrecsar",
+	"add_button_tooltip": "Adicionar Gasto",
+	"refresh_button_tooltip": "Refrescar List de gastos",
+	"expense_list_title": "Gastos de la Compania",
+	"expense_list_subtitle": "Gastos de la Compania ...",
+	"update_button_tooltip": "Modificar Gasto",
+	"delete_button_tooltip": "Eliminar Gasto",
 	"approve_button_tooltip": "Approbar Gasto",
 	"save_button_tooltip": "Save Gasto",
 	"cancel_button_tooltip": "Cancel modificaciones",
@@ -44,5 +52,7 @@
 	"entryDate_placeholder": "Seleccione o entre la fecha del gasto",
 	"subtotal_placeholder": "Entre el monto del gasto sin impuestos",
 	"totalTax_placeholder": "Entre el monto de los impuestos",
-	"total_placeholder": "Entre el monto total del gasto"
+	"total_placeholder": "Entre el monto total del gasto",
+	"upload_button_tooltip": "Adjuntar recibo del gasto",
+	"upload_receipt": "Adjuntar"
 }

@@ -53,6 +53,7 @@ export class ExpenseFormComponent implements OnInit {
 			totalTax: [0, [Validators.required]],
 			total: [0, [Validators.required]],
 			entryDate: [new Date(), [Validators.required]],
+			receipt: [''],
 		});
 	}
 
@@ -126,7 +127,7 @@ export class ExpenseFormComponent implements OnInit {
 
 	onFileSelected(event) {
 		this.selectedFile = event.target.files[0];
-		// console.log(this.selectedFile);
+		console.log(this.selectedFile);
 		this.readReceiptAndPreview(this.selectedFile);
 	}
 

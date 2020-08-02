@@ -10,13 +10,13 @@ import { AppRoutingModule } from '../app-routing.module';
 // components
 import { InputAutocompleteComponent } from '../components/input-autocomplete/input-autocomplete.component';
 import { SelectLanguageComponent } from '../components/select-language/select-language.component';
-import { SamllButtonComponent } from '../components/small-button/small-button.component';
+import { SmallButtonComponent } from '../components/small-button/small-button.component';
 import { MessageDialogComponent } from '../components/message-dialog/message-dialog.component';
 import { StateFieldComponent } from '../components/state-field/state-field.component';
 import { IconTextButtonComponent } from '../components/icon-text-button/icon-text-button.component';
-import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
+// import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 
-// loading and spining
+// loading and spinning
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -25,11 +25,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		InputAutocompleteComponent,
 		SelectLanguageComponent,
 		LoadingSpinnerComponent,
-		SamllButtonComponent,
+		SmallButtonComponent,
 		MessageDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
-		RichTextEditorComponent
+		// RichTextEditorComponent
 	],
 	imports: [
 		CommonModule,
@@ -46,11 +46,11 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		InputAutocompleteComponent,
 		SelectLanguageComponent,
 		LoadingSpinnerComponent,
-		SamllButtonComponent,
+		SmallButtonComponent,
 		MessageDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
-		RichTextEditorComponent
+		// RichTextEditorComponent
 	],
 	providers: [TranslateService],
 })

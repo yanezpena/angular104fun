@@ -15,9 +15,7 @@ export class IconTextButtonComponent implements OnInit {
 
 	constructor() {}
 
-	ngOnInit(): void {
-		console.log(this.ngIconClass);
-	}
+	ngOnInit(): void {}
 
 	onClick(event: any) {
 		this.click.emit(event);

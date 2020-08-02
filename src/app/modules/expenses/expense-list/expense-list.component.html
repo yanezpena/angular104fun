@@ -2,23 +2,28 @@
 	<mat-card-title>
 		<div fxLayout="row" fxLayout.sm="column">
 			<div fxFlex>
-				Company Expenses
+				{{ 'expense_list_title' | translate }}
 			</div>
 			<div fxFlex fxLayoutAlign="end">
 				<app-small-button
 					imageCaption="add"
-					toolTipMessage="Add new Expense"
+					toolTipMessage="{{ 'add_button_tooltip' | translate }}"
 					[ngClass]="'add-small-button-color'"
 					(click)="add()"
 				></app-small-button>
 				<app-small-button
 					imageCaption="refresh"
-					toolTipMessage="Refresh Expenses"
+					toolTipMessage="{{ 'refresh_button_tooltip' | translate }}"
 					(click)="refresh()"
 				></app-small-button>
 			</div>
 		</div>
 	</mat-card-title>
+	<mat-card-subtitle>
+		<span
+			><i>{{ 'expense_list_subtitle' | translate }}</i></span
+		>
+	</mat-card-subtitle>
 	<mat-card-content>
 		<div class="mat-elevation-z8">
 			<table mat-table [dataSource]="dataSource">
@@ -118,19 +123,25 @@
 					>
 						<app-small-button
 							imageCaption="edit"
-							toolTipMessage="Update this Expense"
+							toolTipMessage="{{
+								'update_button_tooltip' | translate
+							}}"
 							[ngClass]="'edit-small-button-color'"
 							(click)="update(record)"
 						></app-small-button>
 						<app-small-button
 							imageCaption="delete"
-							toolTipMessage="Delete this Expense"
+							toolTipMessage="{{
+								'delete_button_tooltip' | translate
+							}}"
 							[ngClass]="'delete-small-button-color'"
 							(click)="remove(record)"
 						></app-small-button>
 						<app-small-button
 							imageCaption="thumb_up"
-							toolTipMessage="Approve this Expense"
+							toolTipMessage="{{
+								'approve_button_tooltip' | translate
+							}}"
 							[ngClass]="'approve-small-button-color'"
 						></app-small-button>
 					</td>

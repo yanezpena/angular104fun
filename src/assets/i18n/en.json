@@ -16,6 +16,14 @@
 	"reconciled": "Reconciled",
 	"approve": "Approve",
 	"save": "Save",
+	"add": "Add",
+	"refresh": "Refresh",
+	"add_button_tooltip": "Add an Expense",
+	"refresh_button_tooltip": "Refresh Expense List",
+	"expense_list_title": "Company Expense List",
+	"expense_list_subtitle": "Company Expenses ...",
+	"update_button_tooltip": "Update Expense",
+	"delete_button_tooltip": "Delete Expense",
 	"approve_button_tooltip": "Approve Expense",
 	"save_button_tooltip": "Save Expense",
 	"cancel_button_tooltip": "Cancel changes",
@@ -44,5 +52,7 @@
 	"entryDate_placeholder": "Choose or enter the Expense date",
 	"subtotal_placeholder": "Enter the Expense amount without Taxes",
 	"totalTax_placeholder": "Enter Expense Tax amount",
-	"total_placeholder": "Enter the Expense Total amount"
+	"total_placeholder": "Enter the Expense Total amount",
+	"upload_button_tooltip": "Attach Expense Receipt",
+	"upload_receipt": "Attach"
 }
