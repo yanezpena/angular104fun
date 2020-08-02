@@ -200,7 +200,7 @@
 						<app-icon-text-button
 							color="primary"
 							textTooltip="upload_button_tooltip"
-							icon="attachment"
+							[icon]="expense.image && expense.image !== null ? 'attachment':'attach_file'"
 							text="upload_receipt"
 							(click)="inputFile.click()"
 						>
