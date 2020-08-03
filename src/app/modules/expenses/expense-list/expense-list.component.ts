@@ -15,6 +15,7 @@ import {
 } from 'src/app/components/message-dialog/message-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
 	selector: 'app-expense-list',
@@ -38,6 +39,8 @@ export class ExpenseListComponent implements OnInit {
 	];
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+	@ViewChild(MatSort, { static: true }) sort: MatSort;
+
 	dataSource = new MatTableDataSource<IExpense>([]);
 
 	expenses: IExpense[];
@@ -57,6 +60,7 @@ export class ExpenseListComponent implements OnInit {
 		this.loadExpenses();
 		// set paginator
 		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort;
 	}
 
 	loadExpenses() {
@@ -128,6 +132,8 @@ export class ExpenseListComponent implements OnInit {
 	refresh() {
 		this.loadExpenses();
 	}
+
+	search() {}
 
 	attachImage(selectedFile: any) {
 		console.log('attachImage', selectedFile);

@@ -5,12 +5,23 @@
 				{{ 'expense_list_title' | translate }}
 			</div>
 			<div fxFlex fxLayoutAlign="end">
+				<!-- search input -->
+				<mat-form-field class="search">
+					<input
+						matInput
+						placeholder="{{ 'search' | translate }}"
+						type="text"
+					/>
+					<mat-icon matSuffix>search</mat-icon>
+				</mat-form-field>
+				<!-- add button -->
 				<app-small-button
 					imageCaption="add"
 					toolTipMessage="{{ 'add_button_tooltip' | translate }}"
 					[ngClass]="'add-small-button-color'"
 					(click)="add()"
 				></app-small-button>
+				<!-- refresh button -->
 				<app-small-button
 					imageCaption="refresh"
 					toolTipMessage="{{ 'refresh_button_tooltip' | translate }}"
@@ -26,10 +37,10 @@
 	</mat-card-subtitle>
 	<mat-card-content>
 		<div class="mat-elevation-z8">
-			<table mat-table [dataSource]="dataSource">
+			<table mat-table matSort [dataSource]="dataSource">
 				<!-- name Column -->
 				<ng-container matColumnDef="name">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'name' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">{{ record.name }}</td>
@@ -37,7 +48,7 @@
 
 				<!-- description Column -->
 				<ng-container matColumnDef="description">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'description' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -47,25 +58,17 @@
 
 				<!-- state Column -->
 				<ng-container matColumnDef="state">
-					<th
-						mat-header-cell
-						class="column-align-center"
-						*matHeaderCellDef
-					>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'state' | translate }}
 					</th>
-					<td
-						mat-cell
-						ngClass="column-align-center"
-						*matCellDef="let record"
-					>
+					<td mat-cell *matCellDef="let record">
 						<app-state-field [id]="record.state"></app-state-field>
 					</td>
 				</ng-container>
 
 				<!-- entryDate Column -->
 				<ng-container matColumnDef="entryDate">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'entryDate' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -75,7 +78,7 @@
 
 				<!-- updateDate Column -->
 				<ng-container matColumnDef="updateDate">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'updateDate' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -85,7 +88,7 @@
 
 				<!-- subtotal Column -->
 				<ng-container matColumnDef="subtotal">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'subtotal' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -95,7 +98,7 @@
 
 				<!-- totalTax Column -->
 				<ng-container matColumnDef="totalTax">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'totalTax' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -105,7 +108,7 @@
 
 				<!-- total Column -->
 				<ng-container matColumnDef="total">
-					<th mat-header-cell *matHeaderCellDef>
+					<th mat-header-cell *matHeaderCellDef mat-sort-header>
 						{{ 'total' | translate }}
 					</th>
 					<td mat-cell *matCellDef="let record">
@@ -118,9 +121,10 @@
 					<th mat-header-cell *matHeaderCellDef></th>
 					<td
 						mat-cell
-						ngClass="column-align-right"
+						class="column-align-center"
 						*matCellDef="let record"
 					>
+						<!-- edit button -->
 						<app-small-button
 							imageCaption="edit"
 							toolTipMessage="{{
@@ -129,6 +133,7 @@
 							[ngClass]="'edit-small-button-color'"
 							(click)="update(record)"
 						></app-small-button>
+						<!-- delete button -->
 						<app-small-button
 							imageCaption="delete"
 							toolTipMessage="{{
@@ -137,6 +142,7 @@
 							[ngClass]="'delete-small-button-color'"
 							(click)="remove(record)"
 						></app-small-button>
+						<!-- approve button -->
 						<app-small-button
 							imageCaption="thumb_up"
 							toolTipMessage="{{
