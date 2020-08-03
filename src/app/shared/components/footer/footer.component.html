@@ -4,6 +4,6 @@
 			<p>&copy; All rights reserved 2020 By</p>
 			<a href="http://www.pyruly.com" target="_blank"> Pyruly Inc. </a>
 		</div>
-		<span fxFlex="nogrow">{{ 'version' | translate }}</span>
+		<span [innerHTML]="getHtmlVersion()" fxFlex="nogrow"></span>
 	</mat-toolbar-row>
 </mat-toolbar>

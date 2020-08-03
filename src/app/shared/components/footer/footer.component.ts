@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+	selector: 'app-footer',
+	templateUrl: './footer.component.html',
+	styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+	constructor(private translateService: TranslateService) {}
 
-  constructor() { }
+	ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
+	getHtmlVersion(): string {
+		return this.translateService.instant('version');
+	}
 }

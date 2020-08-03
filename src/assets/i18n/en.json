@@ -1,5 +1,5 @@
 {
-	"version": "1.0.0",
+	"version": "<i>Built Version</i> - <b>1.0.0</b>",
 	"app_title": "pyExpenses",
 	"select_language": "Select a Language",
 	"delete_message_box_question": "Do you want to <i>delete</i> this record?",
