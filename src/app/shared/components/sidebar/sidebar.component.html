@@ -1,63 +1,62 @@
 <!-- sidebar menu -->
-<mat-nav-list style="padding: 10px; height: 500px;">
+<mat-nav-list class="coloring-sidebar">
 	<!-- logo -->
 	<div class="sidebar-logo">
 		<img src="../assets/img/logo.png" />
 	</div>
 
 	<!-- option menus -->
-	<div
-		fxLayout="column"
-		style="
-			padding: 0px;
-			border-radius: 5px;
-			height: 100%;
-			background: linear-gradient(#a115c4, #6bb427);
-		"
-	>
-		<div fxFlex="grow">
-			<a mat-list-item routerLink="/expenses">
-				<mat-icon>attach_money</mat-icon>
-				Expenses
-			</a>
-			<a mat-list-item routerLink="/expense-form">
-				<mat-icon>attach_money</mat-icon>
-				Expenses
-			</a>
-			<a
-				mat-list-item
-				routerLink=""
-				routerLinkActive="router-link-active"
-			>
-				<mat-icon>show_chart</mat-icon>
-				Dashboard
-			</a>
-			<a
-				mat-list-item
-				routerLink="/search"
-				routerLinkActive="router-link-active"
-			>
-				<mat-icon>search</mat-icon>
-				Search
-			</a>
-			<a
-				mat-list-item
-				routerLink="/users"
-				routerLinkActive="router-link-active"
-			>
-				<mat-icon>person</mat-icon>
-				Users
-			</a>
-		</div>
-		<div fxFlex fxFlexAlign="end center">
-			<a
-				mat-list-item
-				routerLink="/contactUs"
-				routerLinkActive="router-link-active"
-			>
-				<mat-icon>contact_support</mat-icon>
-				Contact Us
-			</a>
+	<!-- coloring sidebar -->
+	<div class="coloring-nav-list">
+		<!-- nav list border -->
+		<div fxLayout="column" class="nav-list-border">
+			<div fxFlex="grow" class="nav-list-top">
+				<a mat-list-item routerLink="/expenses">
+					<mat-icon>attach_money</mat-icon>
+					Expenses
+				</a>
+				<a mat-list-item routerLink="/expense-form">
+					<mat-icon>attach_money</mat-icon>
+					Expenses
+				</a>
+				<a
+					mat-list-item
+					routerLink=""
+					routerLinkActive="router-link-active"
+				>
+					<mat-icon>show_chart</mat-icon>
+					Dashboard
+				</a>
+				<a
+					mat-list-item
+					routerLink="/search"
+					routerLinkActive="router-link-active"
+				>
+					<mat-icon>search</mat-icon>
+					Search
+				</a>
+				<a
+					mat-list-item
+					routerLink="/users"
+					routerLinkActive="router-link-active"
+				>
+					<mat-icon>person</mat-icon>
+					Users
+				</a>
+			</div>
+			<!-- divider -->
+			<mat-divider insert="true"></mat-divider>
+			<!-- nav list continuing  -->
+			<div fxFlex fxFlexAlign="end center" class="nav-list-bottom">
+				<a
+					mat-list-item
+					routerLink="/contactUs"
+					routerLinkActive="router-link-active"
+				>
+					<mat-icon>contact_support</mat-icon>
+					Contact Us
+				</a>
+			</div>
 		</div>
 	</div>
 </mat-nav-list>
