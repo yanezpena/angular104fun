@@ -33,3 +33,36 @@ span {
 .add-small-button-color {
 	color: $add-small-button-color;
 }
+
+/* table defaults */
+table {
+	width: 100%;
+}
+
+.column-align-center {
+	text-align: center;
+}
+
+.column-align-left {
+	text-align: left;
+}
+
+.column-align-right {
+	text-align: right;
+}
+
+th.mat-header-cell {
+	font-size: $standard-font-size;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+tr.mat-header-row,
+tr.mat-row,
+tr.mat-footer-row {
+	height: 65px;
+}
+
+tr.mat-row:hover {
+	background: rgba(255, 255, 255, 0.04);
+}
