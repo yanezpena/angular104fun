@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgForm, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Expense } from '../../../models/Expense';
 import { ExpenseService } from '../../../shared/services/expense.service';
 import { StateOptionService } from '../../../shared/services/state-option.service';
 import { NotificationService } from '../../../shared/services/notification.service';
+import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { IExpense } from 'src/app/models/IExpense';
 
 @Component({
 	selector: 'app-expense-form',
@@ -19,14 +23,26 @@ export class ExpenseFormComponent implements OnInit {
 	// form and control
 	curForm: FormGroup;
 
+	// current expense
 	expense: Expense;
-	submitted = false;
+	currentId: string = null;
+
+	// update or create expense
+	creation: boolean = false;
+
+	submitted: boolean = false;
 	selectedFile: File = null;
+	image;
+
+	// get expense parameter from route
+	expense$: Observable<IExpense>;
+	private unsubscribe: Subject<void> = new Subject();
 
 	stateOptions = [];
 
 	constructor(
 		private router: Router,
+		private route: ActivatedRoute,
 		private fb: FormBuilder,
 		private expenseService: ExpenseService,
 		private stateOptionService: StateOptionService,
@@ -35,16 +51,48 @@ export class ExpenseFormComponent implements OnInit {
 
 	ngOnInit() {
 		console.log('ngOnInit');
-		this.setDefaults();
-		this.stateOptions = this.stateOptionService.getStateOptions();
-		this.newExpense();
+		// get master data collections
+		this.getStaticCollections();
+		// set form defaults
+		this, this.setFormDefaults();
+		// get expense from url parameters
+		this.getCurrentExpenseFromParam();
 	}
 
-	setDefaults() {
+	private getStaticCollections() {
+		this.stateOptions = this.stateOptionService.getStateOptions();
+	}
+
+	getCurrentExpenseFromParam() {
+		// get url record parameters
+		this.route.params
+			.pipe(takeUntil(this.unsubscribe))
+			.subscribe(params => {
+				this.currentId = params['id'] || null;
+				this.creation = !this.currentId;
+				console.log('currentId', this.currentId);
+				if (this.currentId) {
+					// update
+					this.expenseService
+						.getExpense(this.currentId)
+						.pipe(takeUntil(this.unsubscribe))
+						.subscribe(
+							data => {
+								this.loadExpense(data);
+							},
+							error => {
+								console.log('error', error);
+							}
+						);
+				}
+			});
+	}
+
+	setFormDefaults() {
 		this.curForm = this.fb.group({
 			id: null,
 			name: [
-				'',
+				'Service',
 				[Validators.required, Validators.maxLength(this.NAME_MAX_LEN)],
 			],
 			description: ['', [Validators.required]],
@@ -54,31 +102,68 @@ export class ExpenseFormComponent implements OnInit {
 			total: [0, [Validators.required]],
 			entryDate: [new Date(), [Validators.required]],
 			receipt: [''],
+			imageId: [''],
 		});
 	}
 
-	getTitle(): string {
-		return 'Create an Expense';
+	loadExpense(data: any): void {
+		// loads expense
+		this.submitted = false;
+		this.expense = data as Expense;
+		this.image = null;
+		console.log('loadExpense', this.expense);
+		if (this.expense.imageId != null) {
+			this.expenseService.getExpenseImage(this.expense.imageId).subscribe(
+				data => {
+					this.image = ('data:image/jpeg;base64,' + data) as string;
+					this.fillOutForm(this.expense);
+					console.log('image loading', this.expense);
+				},
+				error => {
+					console.log('image loading', error);
+				}
+			);
+		}
+		this.fillOutForm(this.expense);
 	}
 
-	newExpense(): void {
-		this.submitted = false;
-		// init
+	fillOutForm(expense: IExpense) {
+		this.curForm.patchValue({
+			...expense,
+		});
+	}
+
+	fillOutExpense(): void {
 		this.expense = {
-			name: 'Service',
-			state: 'draft',
-			subtotal: 10,
-			totalTax: 2,
-			total: 12,
-			description: 'Carling',
+			name: this.curForm.get('name').value,
+			description: this.curForm.get('description').value,
+			state: this.curForm.get('state').value,
+			subtotal: this.curForm.get('subtotal').value,
+			totalTax: this.curForm.get('totalTax').value,
+			total: this.curForm.get('total').value,
+			entryDate: this.curForm.get('entryDate').value,
+			updateDate: new Date(),
+			imageId: this.curForm.get('imageId').value,
+			// image: null,
 		} as Expense;
 	}
 
 	save() {
-		this.expense.id = `6ec0c700-d841-4814-92b4-b3c4017c9bb9`; //uuid();
-		this.expense.image = null;
-		this.expense.total = this.expense.subtotal + this.expense.totalTax;
-		return this.expenseService.createExpense(this.expense).subscribe(
+		// check creation or not
+		if (this.currentId) {
+			this.expense.id = uuidv4();
+			this.image = null;
+			// const func = this.expenseService.createExpense;
+		} else {
+		}
+		// recalculates total
+		if (
+			this.expense.total !==
+			this.expense.subtotal + this.expense.totalTax
+		) {
+			this.expense.total = this.expense.subtotal + this.expense.totalTax;
+		}
+		return this.expenseService.updateExpense(this.expense).subscribe(
 			data =>
 				this.notification.success(
 					'Expense has been created.',
@@ -90,18 +175,6 @@ export class ExpenseFormComponent implements OnInit {
 					'Create an Expense'
 				)
 		);
-	}
-
-	onSubmit(curform: NgForm) {
-		let frmCtrls = curform.controls;
-		console.log(frmCtrls, frmCtrls.receipt.dirty);
-		this.submitted = true;
-		if (this.expense.image != null && frmCtrls.receipt.dirty) {
-			this.createExpenseImage();
-		} else {
-			this.save();
-		}
-		this.gotoExpenseList();
 	}
 
 	createExpenseImage() {
@@ -120,10 +193,43 @@ export class ExpenseFormComponent implements OnInit {
 		}
 	}
 
+	validationForm() {
+		console.log(
+			'invalid',
+			this.curForm.invalid,
+			'valid',
+			this.curForm.valid
+		);
+		// form have not changed
+		if (this.curForm.pristine) return true;
+		// validations
+		if (this.curForm.dirty && this.curForm.invalid) return false;
+		return true;
+	}
+
+	onSave() {
+		// validate form
+		if (!this.validationForm()) return;
+		// update current expense from form
+		this.fillOutExpense();
+		// check image changes
+		let controls = this.curForm.controls;
+		console.log(controls, controls.receipt.dirty);
+		this.submitted = true;
+		if (this.image != null && controls.receipt.dirty) {
+			this.createExpenseImage();
+		} else {
+			this.save();
+		}
+		this.gotoExpenseList();
+	}
+
 	onCancel() {
 		this.submitted = true;
 		this.gotoExpenseList();
 	}
+
+	onApprove() {}
 
 	onFileSelected(event) {
 		this.selectedFile = event.target.files[0];
@@ -134,7 +240,20 @@ export class ExpenseFormComponent implements OnInit {
 	onReceiptUpload(event) {}
 
 	gotoExpenseList() {
-		this.router.navigate(['expense-list']);
+		this.router.navigate(['expenses']);
+	}
+
+	getTitle(): string {
+		return (
+			(this.creation && 'create_expense_title') || 'update_expense_title'
+		);
+	}
+
+	getSubTitle(): string {
+		return (
+			(this.creation && 'create_expense_subtitle') ||
+			'update_expense_subtitle'
+		);
 	}
 
 	// util functions
@@ -143,7 +262,7 @@ export class ExpenseFormComponent implements OnInit {
 		// File Preview
 		const reader = new FileReader();
 		reader.onload = () => {
-			this.expense.image = reader.result as string;
+			this.image = reader.result as string;
 		};
 		reader.readAsDataURL(file);
 	}

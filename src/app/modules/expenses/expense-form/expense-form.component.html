@@ -2,12 +2,12 @@
 	<mat-card>
 		<mat-card-title>
 			<div fxLayout="row" fxLayout.sm="column">
-				{{ 'update_expense_title' | translate }}
+				{{ getTitle() | translate }}
 			</div>
 		</mat-card-title>
 		<mat-card-subtitle>
 			<span
-				><i>{{ 'update_expense_subtitle' | translate }}</i></span
+				><i>{{ getSubTitle() | translate }}</i></span
 			>
 		</mat-card-subtitle>
 		<mat-card-content class="mat-elevation-z8">
@@ -45,10 +45,7 @@
 
 					<!-- description field -->
 					<div fxLayout="row">
-						<mat-form-field
-							fxFlex="grow"
-							floatLabel="always"
-						>
+						<mat-form-field fxFlex="grow" floatLabel="always">
 							<mat-label>{{
 								'description' | translate
 							}}</mat-label>
@@ -172,18 +169,17 @@
 
 					<!-- receipt - file -->
 					<div>
-						<div style="padding-top: 10px; padding-bottom: 10px;">
+						<div style="image-field">
 							<mat-label>Receipt</mat-label>
 						</div>
 						<!-- image preview -->
-						<div *ngIf="expense.image && expense.image !== null">
+						<div *ngIf="image && image !== null">
 							<img
-								[src]="expense.image"
-								width="25%"
-								height="25%"
-								[alt]="expense.name"
+								[src]="image"
+								width="20%"
+								height="20%"
 								matTooltip="{{
-									'upload_receipt_tooltip' | translate
+									'upload_button_tooltip' | translate
 								}}"
 								(click)="inputFile.click()"
 							/>
@@ -202,7 +198,7 @@
 							color="primary"
 							textTooltip="upload_button_tooltip"
 							[icon]="
-								expense.image && expense.image !== null
+								image && image !== null
 									? 'attachment'
 									: 'attach_file'
 							"
@@ -223,12 +219,14 @@
 							textTooltip="save_button_tooltip"
 							icon="save"
 							text="save"
+							(click)="onSave()"
 						>
 						</app-icon-text-button>
 						<app-icon-text-button
 							textTooltip="cancel_button_tooltip"
 							icon="cancel"
 							text="cancel"
+							(click)="onCancel()"
 						>
 						</app-icon-text-button>
 						<app-icon-text-button
@@ -236,6 +234,7 @@
 							icon="thumb_up"
 							[ngIconClass]="'approve-small-button-color'"
 							text="approve"
+							(click)="onApprove()"
 						>
 						</app-icon-text-button>
 					</div>

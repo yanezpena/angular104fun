@@ -16,6 +16,8 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSort } from '@angular/material/sort';
+import { MatInput } from '@angular/material/input';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-expense-list',
@@ -41,6 +43,10 @@ export class ExpenseListComponent implements OnInit {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 
+	// form and control
+	curForm: FormGroup;
+	searchCtrl: FormControl = new FormControl();
+
 	dataSource = new MatTableDataSource<IExpense>([]);
 
 	expenses: IExpense[];
@@ -49,6 +55,7 @@ export class ExpenseListComponent implements OnInit {
 
 	constructor(
 		private router: Router,
+		private fb: FormBuilder,
 		private expenseService: ExpenseService,
 		private notification: NotificationService,
 		private translateService: TranslateService,
@@ -56,11 +63,38 @@ export class ExpenseListComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		// set default
+		this.setFormDefaults();
+		// filter
+		this.dataSource.filterPredicate = this.filterFunction;
 		// get expense list
 		this.loadExpenses();
 		// set paginator
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+		// search
+		this.curForm.controls.searchInput.valueChanges.subscribe(searchValue => {
+			console.log('valuechanges', searchValue);
+			return (this.dataSource.filter = searchValue);
+		});
+	}
+
+	setFormDefaults() {
+		this.curForm = this.fb.group({
+			searchInput: [''],
+		});
+	}
+
+	filterFunction(u: IExpense, value: string): boolean {
+		if (value) {
+			value = value.trim().toLowerCase();
+			return (
+				u.name.toLowerCase().includes(value) ||
+				u.description.toLowerCase().includes(value)
+			);
+		} else {
+			return true;
+		}
 	}
 
 	loadExpenses() {
@@ -121,8 +155,9 @@ export class ExpenseListComponent implements OnInit {
 		this.router.navigate(['expense-form']);
 	}
 
-	update(id: string) {
-		this.router.navigate(['expense-form', { id: id }]);
+	update(record: IExpense) {
+		console.log('update', record);
+		this.router.navigate(['expense-form', { id: record.id }]);
 	}
 
 	changeValue(id: number, property: string, event: any) {

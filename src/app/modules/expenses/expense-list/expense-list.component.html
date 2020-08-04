@@ -6,14 +6,17 @@
 			</div>
 			<div fxFlex fxLayoutAlign="end">
 				<!-- search input -->
-				<mat-form-field class="search">
-					<input
-						matInput
-						placeholder="{{ 'search' | translate }}"
-						type="text"
-					/>
-					<mat-icon matSuffix>search</mat-icon>
-				</mat-form-field>
+				<form [formGroup]="curForm">
+					<mat-form-field class="search">
+						<input
+							matInput
+							placeholder="{{ 'search' | translate }}"
+							type="text"
+							formControlName="searchInput"
+						/>
+						<mat-icon matSuffix>search</mat-icon>
+					</mat-form-field>
+				</form>
 				<!-- add button -->
 				<app-small-button
 					imageCaption="add"
