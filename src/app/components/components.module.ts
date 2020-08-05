@@ -14,6 +14,8 @@ import { SmallButtonComponent } from '../components/small-button/small-button.co
 import { MessageDialogComponent } from '../components/message-dialog/message-dialog.component';
 import { StateFieldComponent } from '../components/state-field/state-field.component';
 import { IconTextButtonComponent } from '../components/icon-text-button/icon-text-button.component';
+import { SearchInputComponent } from '../components/search-input/search-input.component';
+
 // import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 
 // loading and spinning
@@ -29,6 +31,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		MessageDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
+		SearchInputComponent,
 		// RichTextEditorComponent
 	],
 	imports: [
@@ -50,6 +53,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		MessageDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
+		SearchInputComponent,
 		// RichTextEditorComponent
 	],
 	providers: [TranslateService],

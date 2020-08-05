@@ -16,8 +16,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSort } from '@angular/material/sort';
-import { MatInput } from '@angular/material/input';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
 	selector: 'app-expense-list',
@@ -43,15 +42,9 @@ export class ExpenseListComponent implements OnInit {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 
-	// form and control
-	curForm: FormGroup;
-	searchCtrl: FormControl = new FormControl();
-
 	dataSource = new MatTableDataSource<IExpense>([]);
 
 	expenses: IExpense[];
-
-	editField: string;
 
 	constructor(
 		private router: Router,
@@ -63,7 +56,7 @@ export class ExpenseListComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		// set default
+		// set form defaults
 		this.setFormDefaults();
 		// filter
 		this.dataSource.filterPredicate = this.filterFunction;
@@ -72,18 +65,13 @@ export class ExpenseListComponent implements OnInit {
 		// set paginator
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
-		// search
-		this.curForm.controls.searchInput.valueChanges.subscribe(searchValue => {
-			console.log('valuechanges', searchValue);
-			return (this.dataSource.filter = searchValue);
-		});
 	}
 
-	setFormDefaults() {
-		this.curForm = this.fb.group({
-			searchInput: [''],
-		});
+	onSearchChange(value: string) {
+		this.dataSource.filter = value;
 	}
+
+	setFormDefaults() {}
 
 	filterFunction(u: IExpense, value: string): boolean {
 		if (value) {
@@ -105,11 +93,6 @@ export class ExpenseListComponent implements OnInit {
 				this.expenses = expenseList;
 				this.dataSource.data = this.expenses;
 			});
-	}
-
-	updateList(idx: number, property: string, event: any) {
-		const editField = event.target.textContent;
-		this.expenses[idx][property] = editField;
 	}
 
 	remove(expense: IExpense) {
@@ -158,10 +141,6 @@ export class ExpenseListComponent implements OnInit {
 	update(record: IExpense) {
 		console.log('update', record);
 		this.router.navigate(['expense-form', { id: record.id }]);
-	}
-
-	changeValue(id: number, property: string, event: any) {
-		this.editField = event.target.textContent;
 	}
 
 	refresh() {

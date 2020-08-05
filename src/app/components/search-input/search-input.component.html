@@ -1,0 +1,11 @@
+<form [formGroup]="curForm">
+	<mat-form-field class="search">
+		<input
+			matInput
+			placeholder="{{ 'search' | translate }}"
+			type="text"
+			formControlName="searchInput"
+		/>
+		<mat-icon matSuffix>search</mat-icon>
+	</mat-form-field>
+</form>

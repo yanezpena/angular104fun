@@ -3,10 +3,13 @@
 @import '~@angular/material/prebuilt-themes/purple-green.css';
 @import './assets/css/variables.scss';
 
-body {
-	margin: 0px;
-	font-size: $standard-font-size;
+* {
 	font-family: 'LatoWeb';
+}
+
+body {
+	font-size: $standard-font-size;
+	margin: 0px;
 }
 
 span {
