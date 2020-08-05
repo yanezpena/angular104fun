@@ -206,6 +206,12 @@
 							(click)="inputFile.click()"
 						>
 						</app-icon-text-button>
+						<app-icon-text-button *ngIf="image && image !== null"
+							textTooltip="detach_receipt_tooltip"
+							[icon]="'link_off'"
+							text="detach_receipt"
+						>
+						</app-icon-text-button>
 					</div>
 
 					<!-- actions buttons -->

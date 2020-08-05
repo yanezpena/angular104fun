@@ -55,5 +55,7 @@
 	"totalTax_placeholder": "Enter Expense Tax amount",
 	"total_placeholder": "Enter the Expense Total amount",
 	"upload_button_tooltip": "Attach Expense Receipt",
-	"upload_receipt": "Attach"
+	"upload_receipt": "Attach",
+	"detach_receipt_tooltip": "Detach Expense Receipt",
+	"detach_receipt": "Detach"
 }

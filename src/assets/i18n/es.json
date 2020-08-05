@@ -55,5 +55,7 @@
 	"totalTax_placeholder": "Entre el monto de los impuestos",
 	"total_placeholder": "Entre el monto total del gasto",
 	"upload_button_tooltip": "Adjuntar recibo del gasto",
-	"upload_receipt": "Adjuntar"
+	"upload_receipt": "Adjuntar",
+	"detach_receipt_tooltip": "Eliminar recibo de pago",
+	"detach_receipt": "Eliminar"
 }
