@@ -46,7 +46,7 @@ export class ExpenseFormComponent implements OnInit {
 		private fb: FormBuilder,
 		private expenseService: ExpenseService,
 		private stateOptionService: StateOptionService,
-		private notification: NotificationService
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit() {
@@ -82,6 +82,10 @@ export class ExpenseFormComponent implements OnInit {
 							},
 							error => {
 								console.log('error', error);
+								this.notificationService.error(
+									'Expense has not been loaded',
+									'Loading Expense'
+								);
 							}
 						);
 				}
@@ -121,6 +125,10 @@ export class ExpenseFormComponent implements OnInit {
 				},
 				error => {
 					console.log('image loading', error);
+					this.notificationService.error(
+						'Receipts have not been loaded',
+						'Loading Expense'
+					);
 				}
 			);
 		}
@@ -166,13 +174,13 @@ export class ExpenseFormComponent implements OnInit {
 	create() {
 		this.expenseService.createExpense(this.expense).subscribe(
 			data =>
-				this.notification.success(
+				this.notificationService.success(
 					'Expense has been created.',
 					'Create an Expense'
 				),
 			error =>
-				this.notification.error(
-					`Expense has not been created. Error: ${error}`,
+				this.notificationService.error(
+					`Expense has not been created.`,
 					'Create an Expense'
 				)
 		);
@@ -182,14 +190,14 @@ export class ExpenseFormComponent implements OnInit {
 		console.log('updateExpense', this.expense);
 		this.expenseService.updateExpense(this.expense).subscribe(
 			data =>
-				this.notification.success(
+				this.notificationService.success(
 					'Expense has been updated.',
 					'Update an Expense'
 				),
 			error => {
 				console.log('========>', error.error);
-				this.notification.error(
-					`Expense has not been updated. Error: <strong>${error.status}-${error.statusText}</strong>`,
+				this.notificationService.error(
+					`Expense has not been updated.`,
 					'Update an Expense'
 				);
 			}
@@ -205,7 +213,13 @@ export class ExpenseFormComponent implements OnInit {
 					this.expense.imageId = data.toString();
 					this.save();
 				},
-				error => console.log(error)
+				error => {
+					console.log(error);
+					this.notificationService.error(
+						'Receipts have not been created',
+						'Create Expense Receipt'
+					);
+				}
 			);
 		else {
 			this.save();

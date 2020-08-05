@@ -47,12 +47,11 @@ export class ExpenseListComponent implements OnInit {
 	expenses: IExpense[];
 
 	constructor(
+		private dialog: MatDialog,
 		private router: Router,
-		private fb: FormBuilder,
 		private expenseService: ExpenseService,
-		private notification: NotificationService,
-		private translateService: TranslateService,
-		private dialog: MatDialog
+		private notificationService: NotificationService,
+		private translateService: TranslateService
 	) {}
 
 	ngOnInit() {
@@ -90,10 +89,19 @@ export class ExpenseListComponent implements OnInit {
 		this.expenseService
 			.getExpenses()
 			.pipe(takeUntil(this.unsubcribe))
-			.subscribe(expenseList => {
-				this.expenses = expenseList;
-				this.dataSource.data = this.expenses;
-			});
+			.subscribe(
+				expenseList => {
+					this.expenses = expenseList;
+					this.dataSource.data = this.expenses;
+				},
+				error => {
+					this.notificationService.error(
+						`Expenses have not been loaded.`,
+						'Loading Expenses'
+					);
+					console.log(error);
+				}
+			);
 	}
 
 	remove(expense: IExpense) {
@@ -118,12 +126,12 @@ export class ExpenseListComponent implements OnInit {
 								.deleteExpenseImage(expense.imageId)
 								.subscribe(
 									data =>
-										this.notification.success(
+										this.notificationService.success(
 											'Expense has been deleted.',
 											'Delete an Expense'
 										),
 									error =>
-										this.notification.error(
+										this.notificationService.error(
 											`Expense has not been deleted. Error: ${error}`,
 											'Delete an Expense'
 										)
