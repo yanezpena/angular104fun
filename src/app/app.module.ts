@@ -48,7 +48,12 @@ import { ExpenseService } from './shared/services/expense.service';
 				deps: [HttpClient],
 			},
 		}),
-		ToastrModule.forRoot(),
+		ToastrModule.forRoot({
+			timeOut: 1000,
+			progressBar: true,
+			progressAnimation: 'decreasing',
+			preventDuplicates: true,
+		}),
 		ComponentModule,
 		DefaultModule,
 	],

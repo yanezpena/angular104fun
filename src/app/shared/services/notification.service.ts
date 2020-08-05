@@ -1,57 +1,46 @@
 import { Injectable } from '@angular/core';
-import {
-	MatSnackBarHorizontalPosition,
-	MatSnackBarVerticalPosition,
-	MatSnackBar,
-} from '@angular/material/snack-bar';
+import { ToastrService, IndividualConfig } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class NotificationService {
-	horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-	verticalPosition: MatSnackBarVerticalPosition = 'top';
-	duration: number = 1500;
+	// toastr config
+	toastrConfig: Partial<IndividualConfig> = {
+		timeOut: 2500,
+		progressBar: true,
+		progressAnimation: 'decreasing',
+		closeButton: true,
+	};
 
-	constructor(private _snackBar: MatSnackBar) {}
-
-	openSnackBar(message: string) {
-		this._snackBar.open(message, '', {
-			duration: this.duration,
-			horizontalPosition: this.horizontalPosition,
-			verticalPosition: this.verticalPosition,
-			panelClass:['success-notification'],
-		});
-	}
-
-	// span = `<span class="tim-icons icon-bell-55" [data-notify]="icon"></span>`;
-	// classes = {
-	// 	toastClass: `alert alert-info alert-with-icon`,
-	// 	closeButton: true,
-	// 	enableHtml: true,
-	// 	positionClass: "toast-bottom-center"
-	// };
+	constructor(
+		private toastr: ToastrService,
+		private translationService: TranslateService
+	) {}
 
 	public success(message: string, title: string) {
-		// let text = this.span + ` ${message}.`;
-		// this.classes.toastClass = "alert alert-success alert-with-icon";
-		this.openSnackBar(message);
+		var tr = this.translation(message, title);
+		this.toastr.success(tr.message, tr.title, this.toastrConfig);
 	}
 
-	// public info(message: string, title: string) {
-	// 	let text = this.span + ` ${message}.`;
-	// 	this.classes.toastClass = "alert alert-info alert-with-icon";
-	// 	this.toastr.info(text, title, this.classes);
-	// }
+	public info(message: string, title: string) {
+		var tr = this.translation(message, title);
+		this.toastr.info(tr.message, tr.title, this.toastrConfig);
+	}
 
-	// public warning(message: string, title: string) {
-	// 	let text = this.span + ` ${message}.`;
-	// 	this.classes.toastClass = "alert alert-warning alert-with-icon";
-	// 	this.toastr.warning(text, title, this.classes);
-	// }
+	public warning(message: string, title: string) {
+		var tr = this.translation(message, title);
+		this.toastr.warning(tr.message, tr.title, this.toastrConfig);
+	}
 
 	public error(message: string, title: string) {
-		// 	let text = this.span + ` ${message}.`;
-		// 	this.classes.toastClass = "alert alert-error alert-with-icon";
-		// 	this.toastr.error(text, title, this.classes);
-		this.openSnackBar(message);
+		var tr = this.translation(message, title);
+		this.toastr.error(tr.message, tr.title, this.toastrConfig);
+	}
+
+	private translation(message: string, title: string) {
+		return {
+			message: this.translationService.instant(message),
+			title: this.translationService.instant(title),
+		};
 	}
 }
