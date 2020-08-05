@@ -1,7 +1,8 @@
 @import '../../../../assets/css/variables.scss';
 
 :host {
-	.mat-toolbar-row {
+	.mat-toolbar-multiple-rows {
+		min-height: $footer-height;
 		height: $footer-height;
 	}
 
@@ -29,13 +30,4 @@
 			color: $visited-font-color;
 		}
 	}
-}
-
-::ng-deep.mat-toolbar-multiple-rows {
-	min-height: 0px;
-}
-
-.mat-toolbar-row,
-.mat-toolbar-single-row {
-	height: inherit;
 }

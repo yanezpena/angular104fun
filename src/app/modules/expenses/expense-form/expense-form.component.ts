@@ -131,10 +131,16 @@ export class ExpenseFormComponent implements OnInit {
 		this.curForm.patchValue({
 			...expense,
 		});
+		if (this.creation) {
+			this.curForm.patchValue({
+				id: uuidv4(),
+			});
+		}
 	}
 
 	fillOutExpense(): void {
 		this.expense = {
+			id: this.curForm.get('id').value,
 			name: this.curForm.get('name').value,
 			description: this.curForm.get('description').value,
 			state: this.curForm.get('state').value,
@@ -144,26 +150,21 @@ export class ExpenseFormComponent implements OnInit {
 			entryDate: this.curForm.get('entryDate').value,
 			updateDate: new Date(),
 			imageId: this.curForm.get('imageId').value,
-			// image: null,
 		} as Expense;
 	}
 
 	save() {
+		this.image = null;
 		// check creation or not
-		if (this.currentId) {
-			this.expense.id = uuidv4();
-			this.image = null;
-			// const func = this.expenseService.createExpense;
+		if (this.creation) {
+			this.create();
 		} else {
+			this.update();
 		}
-		// recalculates total
-		if (
-			this.expense.total !==
-			this.expense.subtotal + this.expense.totalTax
-		) {
-			this.expense.total = this.expense.subtotal + this.expense.totalTax;
-		}
-		return this.expenseService.updateExpense(this.expense).subscribe(
+	}
+
+	create() {
+		this.expenseService.createExpense(this.expense).subscribe(
 			data =>
 				this.notification.success(
 					'Expense has been created.',
@@ -174,6 +175,24 @@ export class ExpenseFormComponent implements OnInit {
 					`Expense has not been created. Error: ${error}`,
 					'Create an Expense'
 				)
+		);
+	}
+
+	update() {
+		console.log('updateExpense', this.expense);
+		this.expenseService.updateExpense(this.expense).subscribe(
+			data =>
+				this.notification.success(
+					'Expense has been updated.',
+					'Update an Expense'
+				),
+			error => {
+				console.log('========>', error.error);
+				this.notification.error(
+					`Expense has not been updated. Error: <strong>${error.status}-${error.statusText}</strong>`,
+					'Update an Expense'
+				);
+			}
 		);
 	}
 

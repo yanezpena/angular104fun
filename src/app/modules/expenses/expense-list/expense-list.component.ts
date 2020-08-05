@@ -64,6 +64,7 @@ export class ExpenseListComponent implements OnInit {
 		this.loadExpenses();
 		// set paginator
 		this.dataSource.paginator = this.paginator;
+		// set sorter
 		this.dataSource.sort = this.sort;
 	}
 
