@@ -181,7 +181,6 @@ export class ExpenseFormComponent implements OnInit {
 
 	private create() {
 		this.expense.id = uuidv4();
-		debugger;
 		this.expenseService.createExpense(this.expense).subscribe(
 			data =>
 				this.notificationService.success(

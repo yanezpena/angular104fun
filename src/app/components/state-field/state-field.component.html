@@ -1,9 +1,13 @@
-<div matTooltip="{{ state.id | translate }}">
-	<div>
+<div
+	fxLayout="column"
+	fxLayoutAlign="center center"
+	matTooltip="{{ state.id | translate }}"
+>
+	<div fxFlex="nogrow">
 		<mat-icon [ngClass]="state.color">{{ state.icon }}</mat-icon>
 	</div>
-	<div>
-		<div class="small-font-state-text">
+	<div fxFlex="nogrow">
+		<div fxFlex="nogrow" class="small-font-state-text">
 			<strong>{{ state.id | translate }}</strong>
 		</div>
 	</div>

@@ -32,7 +32,13 @@
 	</mat-card-subtitle>
 	<mat-card-content>
 		<div class="mat-elevation-z8">
-			<table mat-table matSort [dataSource]="dataSource">
+			<table
+				mat-table
+				matSort
+				matSortActive="entryDate"
+				matSortDirection="desc"
+				[dataSource]="dataSource"
+			>
 				<!-- name Column -->
 				<ng-container matColumnDef="name">
 					<th mat-header-cell *matHeaderCellDef mat-sort-header>
