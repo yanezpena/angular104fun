@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class NotificationService {
 	// toastr config
 	toastrConfig: Partial<IndividualConfig> = {
-		timeOut: 2500,
+		timeOut: 2000,
 		progressBar: true,
 		progressAnimation: 'decreasing',
 		closeButton: true,

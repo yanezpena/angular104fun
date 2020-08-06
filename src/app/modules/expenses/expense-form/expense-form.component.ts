@@ -10,6 +10,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { IExpense } from 'src/app/models/IExpense';
+import { formatCurrency } from '@angular/common';
 
 @Component({
 	selector: 'app-expense-form',
@@ -57,6 +58,8 @@ export class ExpenseFormComponent implements OnInit {
 		this, this.setFormDefaults();
 		// get expense from url parameters
 		this.getCurrentExpenseFromParam();
+		// field interactions
+		this.fieldInteractions();
 	}
 
 	private getStaticCollections() {
@@ -65,6 +68,7 @@ export class ExpenseFormComponent implements OnInit {
 
 	getCurrentExpenseFromParam() {
 		// get url record parameters
+		this.creation = true;
 		this.route.params
 			.pipe(takeUntil(this.unsubscribe))
 			.subscribe(params => {
@@ -92,7 +96,7 @@ export class ExpenseFormComponent implements OnInit {
 			});
 	}
 
-	setFormDefaults() {
+	private setFormDefaults() {
 		this.curForm = this.fb.group({
 			id: null,
 			name: [
@@ -110,7 +114,17 @@ export class ExpenseFormComponent implements OnInit {
 		});
 	}
 
-	loadExpense(data: any): void {
+	private fieldInteractions() {
+		const form = this.curForm;
+		form.get('subtotal').valueChanges.subscribe(value => {
+			form.get('total').setValue(value + form.get('totalTax').value);
+		});
+		form.get('totalTax').valueChanges.subscribe(value => {
+			form.get('total').setValue(value + form.get('subtotal').value);
+		});
+	}
+
+	private loadExpense(data: any): void {
 		// loads expense
 		this.submitted = false;
 		this.expense = data as Expense;
@@ -132,21 +146,15 @@ export class ExpenseFormComponent implements OnInit {
 				}
 			);
 		}
-		this.fillOutForm(this.expense);
 	}
 
-	fillOutForm(expense: IExpense) {
+	private fillOutForm(expense: IExpense) {
 		this.curForm.patchValue({
 			...expense,
 		});
-		if (this.creation) {
-			this.curForm.patchValue({
-				id: uuidv4(),
-			});
-		}
 	}
 
-	fillOutExpense(): void {
+	private fillOutExpense(): void {
 		this.expense = {
 			id: this.curForm.get('id').value,
 			name: this.curForm.get('name').value,
@@ -161,7 +169,7 @@ export class ExpenseFormComponent implements OnInit {
 		} as Expense;
 	}
 
-	save() {
+	private save() {
 		this.image = null;
 		// check creation or not
 		if (this.creation) {
@@ -171,7 +179,9 @@ export class ExpenseFormComponent implements OnInit {
 		}
 	}
 
-	create() {
+	private create() {
+		this.expense.id = uuidv4();
+		debugger;
 		this.expenseService.createExpense(this.expense).subscribe(
 			data =>
 				this.notificationService.success(
@@ -186,7 +196,7 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	update() {
+	private update() {
 		console.log('updateExpense', this.expense);
 		this.expenseService.updateExpense(this.expense).subscribe(
 			data =>
@@ -204,7 +214,7 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	createExpenseImage() {
+	private createExpenseImage() {
 		console.log('select File', this.selectedFile);
 		if (this.selectedFile)
 			this.expenseService.createExpenseImage(this.selectedFile).subscribe(
@@ -226,7 +236,7 @@ export class ExpenseFormComponent implements OnInit {
 		}
 	}
 
-	validationForm() {
+	private validationForm() {
 		console.log(
 			'invalid',
 			this.curForm.invalid,
@@ -291,7 +301,7 @@ export class ExpenseFormComponent implements OnInit {
 
 	// util functions
 
-	readReceiptAndPreview(file: File) {
+	private readReceiptAndPreview(file: File) {
 		// File Preview
 		const reader = new FileReader();
 		reader.onload = () => {
