@@ -42,6 +42,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+// datetimepicker
+import {
+	NgxMatDatetimePickerModule,
+	NgxMatNativeDateModule,
+	NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
+
 @NgModule({
 	exports: [
 		A11yModule,
@@ -87,6 +94,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		PortalModule,
 		ScrollingModule,
 		FlexLayoutModule,
+		NgxMatDatetimePickerModule,
+		NgxMatNativeDateModule,
+		NgxMatTimepickerModule,
 	],
 })
 export class MaterialModule {}

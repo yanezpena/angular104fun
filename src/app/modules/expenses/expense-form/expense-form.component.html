@@ -91,18 +91,31 @@
 							<mat-label>{{ 'entryDate' | translate }}</mat-label>
 							<input
 								matInput
-								[matDatepicker]="picker"
+								[ngxMatDatetimePicker]="picker"
+								placeholder="Choose a date"
+								formControlName="entryDate"
+								[disabled]="false"
 								placeholder="{{
 									'entryDate_placeholder' | translate
 								}}"
-								formControlName="entryDate"
 								required
 							/>
 							<mat-datepicker-toggle
 								matSuffix
 								[for]="picker"
 							></mat-datepicker-toggle>
-							<mat-datepicker #picker></mat-datepicker>
+							<ngx-mat-datetime-picker
+								#picker
+								[showSpinners]="true"
+								[showSeconds]="false"
+								[stepHour]="1"
+								[stepMinute]="5"
+								[touchUi]="false"
+								[enableMeridian]="true"
+								[disableMinute]="false"
+								[hideTime]="false"
+							>
+							</ngx-mat-datetime-picker>
 							<mat-error>
 								{{ 'entryDate_is_required' | translate }}
 							</mat-error>
@@ -206,7 +219,8 @@
 							(click)="inputFile.click()"
 						>
 						</app-icon-text-button>
-						<app-icon-text-button *ngIf="image && image !== null"
+						<app-icon-text-button
+							*ngIf="image && image !== null"
 							textTooltip="detach_receipt_tooltip"
 							[icon]="'link_off'"
 							text="detach_receipt"
