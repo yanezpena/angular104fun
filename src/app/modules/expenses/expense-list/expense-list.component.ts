@@ -28,7 +28,6 @@ export class ExpenseListComponent implements OnInit {
 	awaitingExpenses: IExpense[] = [];
 
 	displayedColumns: string[] = [
-		'select',
 		'name',
 		'description',
 		'state',
@@ -38,6 +37,7 @@ export class ExpenseListComponent implements OnInit {
 		'totalTax',
 		'total',
 		'actions',
+		'select',
 	];
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -180,16 +180,6 @@ export class ExpenseListComponent implements OnInit {
 			? this.selection.clear()
 			: this.dataSource.data.forEach(row => this.selection.select(row));
 	}
-
-	/** The label for the checkbox on the passed row */
-	// checkboxLabel(row?: IExpense): string {
-	// 	if (!row) {
-	// 		return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-	// 	}
-	// 	return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-	// 		row.id
-	// 	}`;
-	// }
 
 	// helpers
 }

@@ -40,28 +40,6 @@
 				matSortDirection="desc"
 				[dataSource]="dataSource"
 			>
-				<!-- Checkbox Column -->
-				<ng-container matColumnDef="select">
-					<mat-header-cell *matHeaderCellDef>
-						<mat-checkbox
-							(change)="$event ? masterToggle() : null"
-							[checked]="selection.hasValue() && isAllSelected()"
-							[indeterminate]="
-								selection.hasValue() && !isAllSelected()
-							"
-						>
-						</mat-checkbox>
-					</mat-header-cell>
-					<mat-cell *matCellDef="let row">
-						<mat-checkbox
-							(click)="$event.stopPropagation()"
-							(change)="$event ? selection.toggle(row) : null"
-							[checked]="selection.isSelected(row)"
-						>
-						</mat-checkbox>
-					</mat-cell>
-				</ng-container>
-
 				<!-- name Column -->
 				<ng-container matColumnDef="name">
 					<mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -200,6 +178,28 @@
 							}}"
 							[ngClass]="'approve-small-button-color'"
 						></app-small-button>
+					</mat-cell>
+				</ng-container>
+
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<mat-header-cell class="mat-header-cell-right" *matHeaderCellDef>
+						<mat-checkbox
+							(change)="$event ? masterToggle() : null"
+							[checked]="selection.hasValue() && isAllSelected()"
+							[indeterminate]="
+								selection.hasValue() && !isAllSelected()
+							"
+						>
+						</mat-checkbox>
+					</mat-header-cell>
+					<mat-cell class="mat-cell-right" *matCellDef="let row">
+						<mat-checkbox
+							(click)="$event.stopPropagation()"
+							(change)="$event ? selection.toggle(row) : null"
+							[checked]="selection.isSelected(row)"
+						>
+						</mat-checkbox>
 					</mat-cell>
 				</ng-container>
 
