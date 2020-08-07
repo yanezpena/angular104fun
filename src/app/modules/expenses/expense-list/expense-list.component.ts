@@ -96,6 +96,8 @@ export class ExpenseListComponent implements OnInit {
 				expenseList => {
 					this.expenses = expenseList;
 					this.dataSource.data = this.expenses;
+					// clear all selected expenses after refresh
+					this.selection.clear();
 				},
 				error => {
 					this.notificationService.error(
