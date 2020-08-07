@@ -6,6 +6,7 @@
 	width: 350px;
 }
 
+/* table */
 .mat-column-select {
 	flex: 0 0 5%;
 }
@@ -21,4 +22,9 @@
 .mat-column-totalTax,
 .mat-column-total {
 	flex: 0 0 7%;
+}
+
+::ng-deep.mat-checkbox-inner-container-no-side-margin {
+	height: 14px !important;
+	width: 14px !important;
 }
