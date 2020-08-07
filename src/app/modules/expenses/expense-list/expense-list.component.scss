@@ -6,16 +6,19 @@
 	width: 350px;
 }
 
-.mat-column-subtotal,
-.mat-column-totalTax,
-.mat-column-total {
-	flex: 0 0 7%;
-}
-
-.mat-column-state {
-	flex: 0 0 7%;
+.mat-column-select {
+	flex: 0 0 5%;
 }
 
 .mat-column-name {
 	flex: 0 0 10%;
+}
+.mat-column-state {
+	flex: 0 0 7%;
+}
+
+.mat-column-subtotal,
+.mat-column-totalTax,
+.mat-column-total {
+	flex: 0 0 7%;
 }

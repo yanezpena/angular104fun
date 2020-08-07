@@ -33,12 +33,35 @@
 
 	<mat-card-content>
 		<div class="mat-elevation-z8">
+			<!-- expense table -->
 			<mat-table
 				matSort
 				matSortActive="entryDate"
 				matSortDirection="desc"
 				[dataSource]="dataSource"
 			>
+				<!-- Checkbox Column -->
+				<ng-container matColumnDef="select">
+					<mat-header-cell *matHeaderCellDef>
+						<mat-checkbox
+							(change)="$event ? masterToggle() : null"
+							[checked]="selection.hasValue() && isAllSelected()"
+							[indeterminate]="
+								selection.hasValue() && !isAllSelected()
+							"
+						>
+						</mat-checkbox>
+					</mat-header-cell>
+					<mat-cell *matCellDef="let row">
+						<mat-checkbox
+							(click)="$event.stopPropagation()"
+							(change)="$event ? selection.toggle(row) : null"
+							[checked]="selection.isSelected(row)"
+						>
+						</mat-checkbox>
+					</mat-cell>
+				</ng-container>
+
 				<!-- name Column -->
 				<ng-container matColumnDef="name">
 					<mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -103,6 +126,7 @@
 				<ng-container matColumnDef="subtotal">
 					<mat-header-cell
 						class="w-80 mat-header-cell-right"
+						arrowPosition="before"
 						*matHeaderCellDef
 						mat-sort-header
 					>
@@ -120,6 +144,7 @@
 				<ng-container matColumnDef="totalTax">
 					<mat-header-cell
 						class="mat-header-cell-right"
+						arrowPosition="before"
 						*matHeaderCellDef
 						mat-sort-header
 					>
@@ -134,6 +159,7 @@
 				<ng-container matColumnDef="total">
 					<mat-header-cell
 						class="mat-header-cell-right"
+						arrowPosition="before"
 						*matHeaderCellDef
 						mat-sort-header
 					>
