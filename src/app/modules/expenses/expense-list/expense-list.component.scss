@@ -6,12 +6,16 @@
 	width: 350px;
 }
 
-// .center-header {
-// 	flex-direction: column;
-// 	justify-content: center;
-// }
+.mat-column-subtotal,
+.mat-column-totalTax,
+.mat-column-total {
+	flex: 0 0 7%;
+}
 
-// .center-cell {
-// 	text-align: center;
-// 	justify-content: center;
-// }
+.mat-column-state {
+	flex: 0 0 7%;
+}
+
+.mat-column-name {
+	flex: 0 0 10%;
+}

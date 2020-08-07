@@ -42,32 +42,34 @@ table {
 	width: 100%;
 }
 
-// .column-align-center {
-// 	text-align: center;
-// }
-
-// .column-align-left {
-// 	text-align: left;
-// }
-
-// .column-align-right {
-// 	text-align: right;
-// }
-
-th.mat-header-cell {
+.mat-header-cell {
 	font-size: $standard-font-size;
 	font-weight: bolder;
 	text-transform: uppercase;
 }
 
-tr.mat-header-row,
-tr.mat-row,
-tr.mat-footer-row {
-	height: 65px;
+.mat-row:hover {
+	background: rgba(255, 255, 255, 0.04);
+	border-bottom-color: rgb(245, 245, 245, 0.45);
+	border-bottom-width: 0.005em;
 }
 
-tr.mat-row:hover {
-	background: rgba(255, 255, 255, 0.04);
+.mat-header-cell-center {
+	justify-content: center;
+}
+
+.mat-cell-center {
+	text-align: center;
+	justify-content: center;
+}
+
+.mat-header-cell-right {
+	justify-content: flex-end;
+}
+
+.mat-cell-right {
+	text-align: right;
+	justify-content: flex-end;
 }
 
 /* remove number input spinner */
@@ -75,17 +77,4 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
-}
-
-/* notifications */
-.success-notification {
-	background-color: green;
-	color: whitesmoke;
-	font-weight: bold;
-}
-
-.error-notification {
-	background-color: rgba(255, 0, 0, 0.918);
-	color: whitesmoke;
-	font-weight: bold;
 }
