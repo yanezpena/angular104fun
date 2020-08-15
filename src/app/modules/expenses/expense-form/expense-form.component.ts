@@ -2,15 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
-
-import { Expense } from '../../../models/Expense';
 import { ExpenseService } from '../../../shared/services/expense.service';
 import { StateOptionService } from '../../../shared/services/state-option.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { IExpense } from 'src/app/models/IExpense';
-import { formatCurrency } from '@angular/common';
+import { Expense } from 'src/app/models/expense';
 
 @Component({
 	selector: 'app-expense-form',
@@ -36,7 +33,7 @@ export class ExpenseFormComponent implements OnInit {
 	image;
 
 	// get expense parameter from route
-	expense$: Observable<IExpense>;
+	expense$: Observable<Expense>;
 	private unsubscribe: Subject<void> = new Subject();
 
 	stateOptions = [];
@@ -148,7 +145,7 @@ export class ExpenseFormComponent implements OnInit {
 		}
 	}
 
-	private fillOutForm(expense: IExpense) {
+	private fillOutForm(expense: Expense) {
 		this.curForm.patchValue({
 			...expense,
 		});

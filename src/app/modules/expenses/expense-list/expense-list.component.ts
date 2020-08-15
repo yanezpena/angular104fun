@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IExpense } from '../../../models/IExpense';
+import { Expense } from '../../../models/expense';
 import { ExpenseService } from '../../../shared/services/expense.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -25,7 +25,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class ExpenseListComponent implements OnInit {
 	private unsubcribe: Subject<void> = new Subject();
-	awaitingExpenses: IExpense[] = [];
+	awaitingExpenses: Expense[] = [];
 
 	displayedColumns: string[] = [
 		'name',
@@ -43,11 +43,11 @@ export class ExpenseListComponent implements OnInit {
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 
-	dataSource = new MatTableDataSource<IExpense>([]);
+	dataSource = new MatTableDataSource<Expense>([]);
 
-	expenses: IExpense[];
+	expenses: Expense[];
 
-	selection = new SelectionModel<IExpense>(true, []);
+	selection = new SelectionModel<Expense>(true, []);
 
 	constructor(
 		private dialog: MatDialog,
@@ -62,12 +62,12 @@ export class ExpenseListComponent implements OnInit {
 		this.setFormDefaults();
 		// filter
 		this.dataSource.filterPredicate = this.filterFunction;
-		// get expense list
-		this.loadExpenses();
 		// set paginator
 		this.dataSource.paginator = this.paginator;
 		// set sorter
 		this.dataSource.sort = this.sort;
+		// get expense list
+		this.loadExpenses();
 	}
 
 	onSearchChange(value: string) {
@@ -76,7 +76,7 @@ export class ExpenseListComponent implements OnInit {
 
 	setFormDefaults() {}
 
-	filterFunction(u: IExpense, value: string): boolean {
+	filterFunction(u: Expense, value: string): boolean {
 		if (value) {
 			value = value.trim().toLowerCase();
 			return (
@@ -89,6 +89,7 @@ export class ExpenseListComponent implements OnInit {
 	}
 
 	loadExpenses() {
+		console.log('loadExpenses');
 		this.expenseService
 			.getExpenses()
 			.pipe(takeUntil(this.unsubcribe))
@@ -109,7 +110,7 @@ export class ExpenseListComponent implements OnInit {
 			);
 	}
 
-	remove(expense: IExpense) {
+	remove(expense: Expense) {
 		MessageBox.show(
 			this.dialog,
 			this.translateService.instant('delete_message_box_question'),
@@ -152,7 +153,7 @@ export class ExpenseListComponent implements OnInit {
 		this.router.navigate(['expense-form']);
 	}
 
-	update(record: IExpense) {
+	update(record: Expense) {
 		console.log('update', record);
 		this.router.navigate(['expense-form', { id: record.id }]);
 	}

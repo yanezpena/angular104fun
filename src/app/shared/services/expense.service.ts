@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IExpense } from '../../models/IExpense';
+import { Expense } from '../../models/expense';
 
 @Injectable({
 	providedIn: 'root',
@@ -20,26 +20,26 @@ export class ExpenseService {
 	constructor(private http: HttpClient) {}
 
 	getExpenses() {
-		return this.http.get<IExpense[]>(`${this.baseUrl}`);
+		return this.http.get<Expense[]>(`${this.baseUrl}`);
 	}
 
 	getExpense(id: string) {
-		return this.http.get<IExpense>(`${this.baseUrl}/${id}`);
+		return this.http.get<Expense>(`${this.baseUrl}/${id}`);
 	}
 
 	deleteExpense(id: string) {
-		return this.http.delete<IExpense>(`${this.baseUrl}/${id}`);
+		return this.http.delete<Expense>(`${this.baseUrl}/${id}`);
 	}
 
-	updateExpense(expense: IExpense) {
-		return this.http.patch<IExpense>(
+	updateExpense(expense: Expense) {
+		return this.http.patch<Expense>(
 			`${this.baseUrl}/${expense.id}`,
 			expense
 		);
 	}
 
-	createExpense(expense: IExpense) {
-		return this.http.post<IExpense>(`${this.baseUrl}`, expense);
+	createExpense(expense: Expense) {
+		return this.http.post<Expense>(`${this.baseUrl}`, expense);
 	}
 
 	getExpenseImage(id: string) {

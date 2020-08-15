@@ -1,4 +1,4 @@
-export interface IExpense {
+export interface Expense {
 	id: string;
 	name: string;
 	description?: string;
