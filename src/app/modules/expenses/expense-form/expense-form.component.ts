@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
 import { ExpenseService } from '../../../shared/services/expense.service';
 import { StateOptionService } from '../../../shared/services/state-option.service';
 import { NotificationService } from '../../../shared/services/notification.service';
@@ -21,19 +20,10 @@ export class ExpenseFormComponent implements OnInit {
 	// form and control
 	curForm: FormGroup;
 
-	// current expense
-	expense: Expense;
-	currentId: string = null;
-
 	// update or create expense
 	creation: boolean = false;
 
-	submitted: boolean = false;
-	selectedFile: File = null;
-	image;
-
-	// get expense parameter from route
-	expense$: Observable<Expense>;
+	selectedImageFile: File = null;
 	private unsubscribe: Subject<void> = new Subject();
 
 	stateOptions = [];
@@ -69,13 +59,13 @@ export class ExpenseFormComponent implements OnInit {
 		this.route.params
 			.pipe(takeUntil(this.unsubscribe))
 			.subscribe(params => {
-				this.currentId = params['id'] || null;
-				this.creation = !this.currentId;
-				console.log('currentId', this.currentId);
-				if (this.currentId) {
+				const currentId = params['id'] || null;
+				this.creation = !currentId;
+				console.log('currentId', currentId);
+				if (currentId) {
 					// update
 					this.expenseService
-						.getExpense(this.currentId)
+						.getExpense(currentId)
 						.pipe(takeUntil(this.unsubscribe))
 						.subscribe(
 							data => {
@@ -106,8 +96,10 @@ export class ExpenseFormComponent implements OnInit {
 			totalTax: [0, [Validators.required]],
 			total: [0, [Validators.required]],
 			entryDate: [new Date(), [Validators.required]],
-			receipt: [''],
-			imageId: [''],
+			imageId: null,
+			// extra fields
+			receipt: null,
+			image: null,
 		});
 	}
 
@@ -123,19 +115,18 @@ export class ExpenseFormComponent implements OnInit {
 
 	private loadExpense(data: any): void {
 		// loads expense
-		this.submitted = false;
-		this.expense = data as Expense;
-		this.image = null;
-		console.log('loadExpense', this.expense);
-		if (this.expense.imageId != null) {
-			this.expenseService.getExpenseImage(this.expense.imageId).subscribe(
+		const expense = data as Expense;
+		// load expense
+		this.fillOutForm(expense);
+		// load image
+		if (expense.imageId) {
+			this.expenseService.getExpenseImage(expense.imageId).subscribe(
 				data => {
-					this.image = ('data:image/jpeg;base64,' + data) as string;
-					this.fillOutForm(this.expense);
-					console.log('image loading', this.expense);
+					this.setImage(('data:image/jpeg;base64,' + data) as string);
+					console.log('image loading', expense);
 				},
 				error => {
-					console.log('image loading', error);
+					// todo: set image error
 					this.notificationService.error(
 						'Receipts have not been loaded',
 						'Loading Expense'
@@ -149,10 +140,11 @@ export class ExpenseFormComponent implements OnInit {
 		this.curForm.patchValue({
 			...expense,
 		});
+		console.log('loadExpense - refresh form', expense);
 	}
 
-	private fillOutExpense(): void {
-		this.expense = {
+	private fillOutExpense(): Expense {
+		return {
 			id: this.curForm.get('id').value,
 			name: this.curForm.get('name').value,
 			description: this.curForm.get('description').value,
@@ -166,19 +158,18 @@ export class ExpenseFormComponent implements OnInit {
 		} as Expense;
 	}
 
-	private save() {
-		this.image = null;
+	private save(expense: Expense) {
+		this.setImage();
 		// check creation or not
 		if (this.creation) {
-			this.create();
+			this.create(expense);
 		} else {
-			this.update();
+			this.update(expense);
 		}
 	}
 
-	private create() {
-		this.expense.id = uuidv4();
-		this.expenseService.createExpense(this.expense).subscribe(
+	private create(expense: Expense) {
+		this.expenseService.createExpense(expense).subscribe(
 			data =>
 				this.notificationService.success(
 					'Expense has been created.',
@@ -192,16 +183,15 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	private update() {
-		console.log('updateExpense', this.expense);
-		this.expenseService.updateExpense(this.expense).subscribe(
+	private update(expense: Expense) {
+		console.log('updateExpense', expense);
+		this.expenseService.updateExpense(expense).subscribe(
 			data =>
 				this.notificationService.success(
 					'Expense has been updated.',
 					'Update an Expense'
 				),
 			error => {
-				console.log('========>', error.error);
 				this.notificationService.error(
 					`Expense has not been updated.`,
 					'Update an Expense'
@@ -210,14 +200,14 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	private createExpenseImage() {
-		console.log('select File', this.selectedFile);
-		if (this.selectedFile)
-			this.expenseService.createExpenseImage(this.selectedFile).subscribe(
+	private createExpenseImage(file: File, expense: Expense) {
+		console.log('Image File', file);
+		if (file)
+			this.expenseService.createExpenseImage(file).subscribe(
 				data => {
-					console.log('createExpenseImage', data);
-					this.expense.imageId = data.toString();
-					this.save();
+					console.log('Expense Image Id', data);
+					expense.imageId = data.toString();
+					this.save(expense);
 				},
 				error => {
 					console.log(error);
@@ -225,10 +215,12 @@ export class ExpenseFormComponent implements OnInit {
 						'Receipts have not been created',
 						'Create Expense Receipt'
 					);
+					expense.imageId = null;
+					this.save(expense);
 				}
 			);
 		else {
-			this.save();
+			this.save(expense);
 		}
 	}
 
@@ -250,33 +242,46 @@ export class ExpenseFormComponent implements OnInit {
 		// validate form
 		if (!this.validationForm()) return;
 		// update current expense from form
-		this.fillOutExpense();
+		let expense = this.fillOutExpense();
 		// check image changes
 		let controls = this.curForm.controls;
 		console.log(controls, controls.receipt.dirty);
-		this.submitted = true;
-		if (this.image != null && controls.receipt.dirty) {
-			this.createExpenseImage();
+		if (this.getImage() != null && controls.receipt.dirty) {
+			this.createExpenseImage(this.selectedImageFile, expense);
 		} else {
-			this.save();
+			this.save(expense);
 		}
 		this.gotoExpenseList();
 	}
 
 	onCancel() {
-		this.submitted = true;
 		this.gotoExpenseList();
 	}
 
 	onApprove() {}
 
+	onDetach() {
+		// clean image
+		this.setImage();
+	}
+
 	onFileSelected(event) {
-		this.selectedFile = event.target.files[0];
-		console.log(this.selectedFile);
-		this.readReceiptAndPreview(this.selectedFile);
+		this.selectedImageFile = event.target.files[0];
+		console.log(this.selectedImageFile);
+		this.readReceiptAndPreview(this.selectedImageFile);
 	}
 
 	onReceiptUpload(event) {}
+
+	// util functions
+
+	setImage(value = null) {
+		this.curForm.patchValue({ image: value });
+	}
+
+	public getImage() {
+		return this.curForm.get('image').value;
+	}
 
 	gotoExpenseList() {
 		this.router.navigate(['expenses']);
@@ -295,13 +300,11 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	// util functions
-
 	private readReceiptAndPreview(file: File) {
 		// File Preview
 		const reader = new FileReader();
 		reader.onload = () => {
-			this.image = reader.result as string;
+			this.setImage(reader.result as string);
 		};
 		reader.readAsDataURL(file);
 	}
