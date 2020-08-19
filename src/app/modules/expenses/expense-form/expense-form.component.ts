@@ -179,7 +179,10 @@ export class ExpenseFormComponent implements OnInit {
 				this.notificationService.error(
 					`Expense has not been created.`,
 					'Create an Expense'
-				)
+				),
+			() => {
+				this.gotoExpenseList();
+			}
 		);
 	}
 
@@ -196,18 +199,20 @@ export class ExpenseFormComponent implements OnInit {
 					`Expense has not been updated.`,
 					'Update an Expense'
 				);
+			},
+			() => {
+				this.gotoExpenseList();
 			}
 		);
 	}
 
-	private createExpenseImage(file: File, expense: Expense) {
+	private saveExpenseAndImage(file: File, expense: Expense) {
 		console.log('Image File', file);
 		if (file)
 			this.expenseService.createExpenseImage(file).subscribe(
 				data => {
 					console.log('Expense Image Id', data);
 					expense.imageId = data.toString();
-					this.save(expense);
 				},
 				error => {
 					console.log(error);
@@ -215,7 +220,10 @@ export class ExpenseFormComponent implements OnInit {
 						'Receipts have not been created',
 						'Create Expense Receipt'
 					);
+					// save expense, no receipt
 					expense.imageId = null;
+				},
+				() => {
 					this.save(expense);
 				}
 			);
@@ -243,15 +251,8 @@ export class ExpenseFormComponent implements OnInit {
 		if (!this.validationForm()) return;
 		// update current expense from form
 		let expense = this.fillOutExpense();
-		// check image changes
-		let controls = this.curForm.controls;
-		console.log(controls, controls.receipt.dirty);
-		if (this.getImage() != null && controls.receipt.dirty) {
-			this.createExpenseImage(this.selectedImageFile, expense);
-		} else {
-			this.save(expense);
-		}
-		this.gotoExpenseList();
+		// save expense and image
+		this.saveExpenseAndImage(this.selectedImageFile, expense);
 	}
 
 	onCancel() {
