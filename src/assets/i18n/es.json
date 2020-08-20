@@ -57,5 +57,6 @@
 	"upload_button_tooltip": "Adjuntar recibo del gasto",
 	"upload_receipt": "Adjuntar",
 	"detach_receipt_tooltip": "Eliminar recibo de pago",
-	"detach_receipt": "Eliminar"
+	"detach_receipt": "Eliminar",
+	"unsaved_changes": "Existen modificaciones sin salvar. Desea continuar?"
 }

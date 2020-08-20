@@ -57,5 +57,6 @@
 	"upload_button_tooltip": "Attach Expense Receipt(FR)",
 	"upload_receipt": "Attach(FR)",
 	"detach_receipt_tooltip": "Detach Expense Receipt(FR)",
-	"detach_receipt": "Detach(FR)"
+	"detach_receipt": "Detach(FR)",
+	"unsaved_changes": "There are some unsaved modifications. Do you want to continue?(FR)"
 }

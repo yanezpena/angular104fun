@@ -21,6 +21,7 @@ import { SearchInputComponent } from '../components/search-input/search-input.co
 // loading and spinning
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.guard';
 
 @NgModule({
 	declarations: [
@@ -56,6 +57,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 		SearchInputComponent,
 		// RichTextEditorComponent
 	],
-	providers: [TranslateService],
+	providers: [TranslateService, CanDeactivateGuard],
 })
 export class ComponentModule {}

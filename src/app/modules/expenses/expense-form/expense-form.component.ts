@@ -5,15 +5,17 @@ import { ExpenseService } from '../../../shared/services/expense.service';
 import { StateOptionService } from '../../../shared/services/state-option.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { takeUntil } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Expense } from 'src/app/models/expense';
+import { CanDeactivateComponent } from '../../../components/can-deactivate/can-deactivate.component';
 
 @Component({
 	selector: 'app-expense-form',
 	templateUrl: './expense-form.component.html',
 	styleUrls: ['./expense-form.component.scss'],
 })
-export class ExpenseFormComponent implements OnInit {
+export class ExpenseFormComponent extends CanDeactivateComponent
+	implements OnInit {
 	// constants
 	NAME_MAX_LEN = 250;
 
@@ -35,7 +37,14 @@ export class ExpenseFormComponent implements OnInit {
 		private expenseService: ExpenseService,
 		private stateOptionService: StateOptionService,
 		private notificationService: NotificationService
-	) {}
+	) {
+		super();
+	}
+
+	canDeactivate(): boolean {
+		console.log('touched', this.curForm.touched);
+		return !this.curForm.touched;
+	}
 
 	ngOnInit() {
 		console.log('ngOnInit');
@@ -161,6 +170,8 @@ export class ExpenseFormComponent implements OnInit {
 	private save(expense: Expense) {
 		// clean image - not save as part of expense
 		this.image = null;
+		// clean form
+		this.curForm.markAsUntouched();
 		// check creation or not
 		if (this.creation) {
 			this.create(expense);
@@ -287,11 +298,12 @@ export class ExpenseFormComponent implements OnInit {
 		// form have not changed
 		if (this.curForm.pristine) return true;
 		// validations
-		if (this.curForm.dirty && this.curForm.invalid) return false;
-		return true;
+		return !this.isFormValid;
 	}
 
 	onCancel() {
+		// clean form
+		this.curForm.markAsUntouched();
 		this.gotoExpenseList();
 	}
 
@@ -324,6 +336,10 @@ export class ExpenseFormComponent implements OnInit {
 
 	get isReceiptDirty() {
 		return this.curForm.get('receipt').dirty;
+	}
+
+	get isFormValid() {
+		return this.curForm.dirty && this.curForm.invalid;
 	}
 
 	gotoExpenseList() {
