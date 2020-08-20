@@ -122,7 +122,7 @@ export class ExpenseFormComponent implements OnInit {
 		if (expense.imageId) {
 			this.expenseService.getExpenseImage(expense.imageId).subscribe(
 				data => {
-					this.setImage(('data:image/jpeg;base64,' + data) as string);
+					this.image = ('data:image/jpeg;base64,' + data) as string;
 					console.log('image loading', expense);
 				},
 				error => {
@@ -159,7 +159,8 @@ export class ExpenseFormComponent implements OnInit {
 	}
 
 	private save(expense: Expense) {
-		this.setImage();
+		// clean image - not save as part of expense
+		this.image = null;
 		// check creation or not
 		if (this.creation) {
 			this.create(expense);
@@ -206,53 +207,88 @@ export class ExpenseFormComponent implements OnInit {
 		);
 	}
 
-	private saveExpenseAndImage(file: File, expense: Expense) {
-		console.log('Image File', file);
-		if (file)
-			this.expenseService.createExpenseImage(file).subscribe(
-				data => {
-					console.log('Expense Image Id', data);
-					expense.imageId = data.toString();
-				},
-				error => {
-					console.log(error);
-					this.notificationService.error(
-						'Receipts have not been created',
-						'Create Expense Receipt'
-					);
-					// save expense, no receipt
-					expense.imageId = null;
-				},
-				() => {
-					this.save(expense);
-				}
-			);
-		else {
+	onSave() {
+		// validate form
+		if (!this.validationForm()) return;
+		console.log('isReceiptDirty', this.isReceiptDirty);
+
+		// update current expense from form
+		let expense = this.fillOutExpense();
+		const file = this.selectedImageFile;
+
+		// image not modified
+		if (!this.isReceiptDirty) {
 			this.save(expense);
+			return;
+		}
+
+		// save expense and image
+		// selected file and image is set
+		if (file) {
+			if (expense.imageId) {
+				// delete old image
+				this.expenseService
+					.deleteExpenseImage(expense.imageId)
+					.subscribe(
+						data => {
+							expense.imageId = null;
+						},
+						error => {},
+						() => {
+							this.saveExpenseAndImage(file, expense);
+						}
+					);
+			} else {
+				this.saveExpenseAndImage(file, expense);
+			}
+		} else {
+			if (expense.imageId) {
+				// delete old image
+				this.expenseService
+					.deleteExpenseImage(expense.imageId)
+					.subscribe(
+						data => {
+							expense.imageId = null;
+						},
+						error => {},
+						() => {
+							this.save(expense);
+						}
+					);
+			} else {
+				this.save(expense);
+			}
 		}
 	}
 
-	private validationForm() {
-		console.log(
-			'invalid',
-			this.curForm.invalid,
-			'valid',
-			this.curForm.valid
+	private saveExpenseAndImage(file: File, expense: Expense) {
+		// store the image file and save the expense
+		this.expenseService.createExpenseImage(file).subscribe(
+			data => {
+				console.log('Expense Image Id', data);
+				expense.imageId = data.toString();
+			},
+			error => {
+				console.log(error);
+				this.notificationService.error(
+					'Receipts have not been created',
+					'Create Expense Receipt'
+				);
+				// save expense, no receipt
+				// expense.imageId = null;
+			},
+			() => {
+				this.save(expense);
+			}
 		);
+	}
+
+	private validationForm() {
 		// form have not changed
 		if (this.curForm.pristine) return true;
 		// validations
 		if (this.curForm.dirty && this.curForm.invalid) return false;
 		return true;
-	}
-
-	onSave() {
-		// validate form
-		if (!this.validationForm()) return;
-		// update current expense from form
-		let expense = this.fillOutExpense();
-		// save expense and image
-		this.saveExpenseAndImage(this.selectedImageFile, expense);
 	}
 
 	onCancel() {
@@ -262,8 +298,10 @@ export class ExpenseFormComponent implements OnInit {
 	onApprove() {}
 
 	onDetach() {
-		// clean image
-		this.setImage();
+		// clean image,  selected file and set dirty receipt control
+		this.image = null;
+		this.selectedImageFile = null;
+		this.curForm.get('receipt').markAsDirty();
 	}
 
 	onFileSelected(event) {
@@ -276,12 +314,16 @@ export class ExpenseFormComponent implements OnInit {
 
 	// util functions
 
-	setImage(value = null) {
+	set image(value) {
 		this.curForm.patchValue({ image: value });
 	}
 
-	public getImage() {
+	get image(): string {
 		return this.curForm.get('image').value;
+	}
+
+	get isReceiptDirty() {
+		return this.curForm.get('receipt').dirty;
 	}
 
 	gotoExpenseList() {
@@ -305,7 +347,7 @@ export class ExpenseFormComponent implements OnInit {
 		// File Preview
 		const reader = new FileReader();
 		reader.onload = () => {
-			this.setImage(reader.result as string);
+			this.image = reader.result as string;
 		};
 		reader.readAsDataURL(file);
 	}

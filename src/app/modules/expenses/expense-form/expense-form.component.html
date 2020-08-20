@@ -184,9 +184,9 @@
 							<mat-label>Receipt</mat-label>
 						</div>
 						<!-- image preview -->
-						<div *ngIf="getImage() !== null">
+						<div *ngIf="image">
 							<img
-								[src]="getImage()"
+								[src]="image"
 								width="10%"
 								height="10%"
 								matTooltip="{{
@@ -208,17 +208,13 @@
 						<app-icon-text-button
 							color="primary"
 							textTooltip="upload_button_tooltip"
-							[icon]="
-								getImage() !== null
-									? 'attachment'
-									: 'attach_file'
-							"
+							[icon]="image ? 'attachment' : 'attach_file'"
 							text="upload_receipt"
 							(click)="inputFile.click()"
 						>
 						</app-icon-text-button>
 						<app-icon-text-button
-							*ngIf="getImage() !== null"
+							*ngIf="image"
 							textTooltip="detach_receipt_tooltip"
 							[icon]="'link_off'"
 							text="detach_receipt"
