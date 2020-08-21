@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { ConfirmationComponent } from './confirmation.component';
+import { ConfirmationComponent } from './confirmation-dialog.component';
 
 export interface ComponentCanDeactivate {
 	canDeactivate(): boolean | Observable<boolean>;
@@ -18,7 +18,6 @@ export class CanDeactivateGuard
 	implements CanDeactivate<ComponentCanDeactivate> {
 	constructor(readonly matDialog: MatDialog) {}
 
-	@HostListener('window:beforeunload')
 	canDeactivate(
 		component: ComponentCanDeactivate
 	): boolean | Observable<boolean> {

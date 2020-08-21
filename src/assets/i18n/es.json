@@ -58,5 +58,9 @@
 	"upload_receipt": "Adjuntar",
 	"detach_receipt_tooltip": "Eliminar recibo de pago",
 	"detach_receipt": "Eliminar",
-	"unsaved_changes": "Existen modificaciones sin salvar. Desea continuar?"
+	"unsaved_changes": "Existen modificaciones sin salvar. Desea continuar?",
+	"unsaved_changes_title": "Modificaciones sin guardar",
+	"unsaved_changes_content": "Que desea hacer?",
+	"stay_on_form": "NO PERDER LAS MODIFICACIONES",
+	"leave_without_saving": "PERDER LAS MODIFICACIONES"
 }

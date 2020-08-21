@@ -22,7 +22,7 @@ import { SearchInputComponent } from '../components/search-input/search-input.co
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.guard';
-import { ConfirmationComponent } from './can-deactivate/confirmation.component';
+import { ConfirmationComponent } from './can-deactivate/confirmation-dialog.component';
 
 @NgModule({
 	declarations: [

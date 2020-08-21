@@ -1,0 +1,44 @@
+<mat-toolbar>
+	<mat-toolbar-row fxLayoutAlign="space-between center">
+		<!-- caption -->
+		<span fxFlex>{{ 'unsaved_changes_title' | translate }}</span>
+		<!-- close button -->
+		<button
+			fxFlex="nogrow"
+			fxFlexAlign="start"
+			mat-icon-button
+			(click)="onClickCancel()"
+		>
+			<mat-icon matTooltip="{{ 'close' | translate }}">close</mat-icon>
+		</button>
+	</mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+	<mat-card-content fxLayoutAlign="none center" fxLayoutGap="20px">
+		<!-- icon -->
+		<mat-icon>pan_tool</mat-icon>
+		<!-- info -->
+		<div fxLayout="column" fxLayoutGap="10px">
+			<div>{{ 'unsaved_changes_content' | translate }}</div>
+		</div>
+	</mat-card-content>
+	<!-- buttons -->
+	<mat-card-actions>
+		<button
+			mat-raised-button
+			color="primary"
+			(click)="onClickCancel()"
+			cdkFocusInitial
+		>
+			{{ 'stay_on_form' | translate }}
+		</button>
+		<button
+			mat-raised-button
+			class="confirm-button"
+			color="warn"
+			(click)="onClickConfirm()"
+		>
+			{{ 'leave_without_saving' | translate }}
+		</button>
+	</mat-card-actions>
+</mat-card>

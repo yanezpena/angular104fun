@@ -43,7 +43,6 @@
 			color="primary"
 			cdkFocusInitial
 			(click)="onOk()"
-			tabindex="-1"
 		>
 			{{ 'ok' | translate }}
 		</button>
@@ -61,12 +60,7 @@
 			>
 				{{ 'ok' | translate }}
 			</button>
-			<button
-				mat-raised-button
-				color="primary"
-				(click)="onCancel()"
-				tabindex="-1"
-			>
+			<button mat-raised-button color="primary" (click)="onCancel()">
 				{{ 'cancel' | translate }}
 			</button>
 		</div>
@@ -81,16 +75,10 @@
 				color="primary"
 				(click)="onYes()"
 				cdkFocusInitial
-				tabindex="-1"
 			>
 				{{ 'yes' | translate }}
 			</button>
-			<button
-				mat-raised-button
-				color="primary"
-				(click)="onNo()"
-				tabindex="-1"
-			>
+			<button mat-raised-button color="primary" (click)="onNo()">
 				{{ 'no' | translate }}
 			</button>
 		</div>

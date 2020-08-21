@@ -48,7 +48,7 @@
 	"total": "Total",
 	"total_is_required": "This field is required",
 	"name_placeholder": "Enter the Expense name",
-	"description_placeholder": "Desscribe the expense",
+	"description_placeholder": "Describe the expense",
 	"state_placeholder": "Choose the Expense State",
 	"entryDate_placeholder": "Choose or enter the Expense date",
 	"subtotal_placeholder": "Enter the Expense amount without Taxes",
@@ -58,5 +58,9 @@
 	"upload_receipt": "Attach",
 	"detach_receipt_tooltip": "Detach Expense Receipt",
 	"detach_receipt": "Detach",
-	"unsaved_changes": "There are some unsaved modifications. Do you want to continue?"
+	"unsaved_changes": "There are some unsaved modifications. Do you want to continue?",
+	"unsaved_changes_title": "Unsaved modifications",
+	"unsaved_changes_content": "What would you like to do?",
+	"stay_on_form": "STAY ON THE FORM",
+	"leave_without_saving": "LEAVE WITHOUT SAVING"
 }
