@@ -1,20 +1,47 @@
+import { Injectable, HostListener } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CanDeactivate } from '@angular/router';
-import { CanDeactivateComponent } from './can-deactivate.component';
-import { TranslateService } from '@ngx-translate/core';
-import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ConfirmationComponent } from './confirmation.component';
+
+export interface ComponentCanDeactivate {
+	canDeactivate(): boolean | Observable<boolean>;
+}
+
+export const CanDeactivateState = {
+	defendAgainstBrowserBackButton: false,
+};
 
 @Injectable()
 export class CanDeactivateGuard
-	implements CanDeactivate<CanDeactivateComponent> {
-	constructor(public translateService: TranslateService) {}
-	canDeactivate(component: CanDeactivateComponent): boolean {
-		if (!component.canDeactivate()) {
-			if (confirm(this.translateService.instant('unsaved_changes'))) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return true;
+	implements CanDeactivate<ComponentCanDeactivate> {
+	constructor(readonly matDialog: MatDialog) {}
+
+	@HostListener('window:beforeunload')
+	canDeactivate(
+		component: ComponentCanDeactivate
+	): boolean | Observable<boolean> {
+		return (
+			component.canDeactivate() ||
+			this.matDialog
+				.open<ConfirmationComponent, void, boolean>(
+					ConfirmationComponent,
+					{
+						disableClose: true,
+					}
+				)
+				.afterClosed()
+				.pipe(
+					tap(confirmed => {
+						if (
+							!confirmed &&
+							CanDeactivateState.defendAgainstBrowserBackButton
+						) {
+							history.pushState(null, '', '');
+						}
+					})
+				)
+		);
 	}
 }

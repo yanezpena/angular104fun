@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ExpenseService } from '../../../shared/services/expense.service';
@@ -7,15 +7,14 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Expense } from 'src/app/models/expense';
-import { CanDeactivateComponent } from '../../../components/can-deactivate/can-deactivate.component';
+import { ComponentCanDeactivate } from '../../../components/can-deactivate/can-deactivate.guard';
 
 @Component({
 	selector: 'app-expense-form',
 	templateUrl: './expense-form.component.html',
 	styleUrls: ['./expense-form.component.scss'],
 })
-export class ExpenseFormComponent extends CanDeactivateComponent
-	implements OnInit {
+export class ExpenseFormComponent implements ComponentCanDeactivate {
 	// constants
 	NAME_MAX_LEN = 250;
 
@@ -37,13 +36,19 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 		private expenseService: ExpenseService,
 		private stateOptionService: StateOptionService,
 		private notificationService: NotificationService
-	) {
-		super();
+	) {}
+
+	// @HostListener allows us to also guard against browser refresh, close, etc.
+	@HostListener('window:beforeunload', ['$event'])
+	public onPageUnload($event: BeforeUnloadEvent) {
+		if (this.canDeactivate()) {
+			$event.returnValue = true;
+		}
 	}
 
 	canDeactivate(): boolean {
-		console.log('touched', this.curForm.touched);
-		return !this.curForm.touched;
+		console.log('dirty', this.isFormTouched);
+		return !this.isFormTouched;
 	}
 
 	ngOnInit() {
@@ -170,8 +175,6 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 	private save(expense: Expense) {
 		// clean image - not save as part of expense
 		this.image = null;
-		// clean form
-		this.curForm.markAsUntouched();
 		// check creation or not
 		if (this.creation) {
 			this.create(expense);
@@ -193,7 +196,7 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 					'Create an Expense'
 				),
 			() => {
-				this.gotoExpenseList();
+				this.backToExpenseList();
 			}
 		);
 	}
@@ -213,7 +216,7 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 				);
 			},
 			() => {
-				this.gotoExpenseList();
+				this.backToExpenseList();
 			}
 		);
 	}
@@ -303,8 +306,7 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 
 	onCancel() {
 		// clean form
-		this.curForm.markAsUntouched();
-		this.gotoExpenseList();
+		this.backToExpenseList();
 	}
 
 	onApprove() {}
@@ -326,6 +328,11 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 
 	// util functions
 
+	backToExpenseList() {
+		this.curForm.markAsUntouched();
+		this.gotoExpenseList();
+	}
+
 	set image(value) {
 		this.curForm.patchValue({ image: value });
 	}
@@ -340,6 +347,10 @@ export class ExpenseFormComponent extends CanDeactivateComponent
 
 	get isFormValid() {
 		return this.curForm.dirty && this.curForm.invalid;
+	}
+
+	get isFormTouched() {
+		return this.curForm.touched;
 	}
 
 	gotoExpenseList() {

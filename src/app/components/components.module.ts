@@ -22,6 +22,7 @@ import { SearchInputComponent } from '../components/search-input/search-input.co
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.guard';
+import { ConfirmationComponent } from './can-deactivate/confirmation.component';
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.
 		LoadingSpinnerComponent,
 		SmallButtonComponent,
 		MessageDialogComponent,
+		ConfirmationComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
 		SearchInputComponent,
@@ -52,11 +54,13 @@ import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.
 		LoadingSpinnerComponent,
 		SmallButtonComponent,
 		MessageDialogComponent,
+		ConfirmationComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
 		SearchInputComponent,
 		// RichTextEditorComponent
 	],
 	providers: [TranslateService, CanDeactivateGuard],
+	entryComponents: [ConfirmationComponent],
 })
 export class ComponentModule {}

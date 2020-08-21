@@ -9,9 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {
 	MessageBox,
-	MessageIcon,
+	MessageBoxIcon,
 	MessageBoxButton,
-	MessageResult,
+	MessageBoxResult,
 } from 'src/app/components/message-dialog/message-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -118,9 +118,9 @@ export class ExpenseListComponent implements OnInit {
 			MessageBoxButton.YesNo,
 			null,
 			false,
-			MessageIcon.Question
-		).subscribe(data => {
-			if (data.result === MessageResult.Yes) {
+			MessageBoxIcon.Question
+		).subscribe(result => {
+			if (result === MessageBoxResult.Yes) {
 				this.expenseService.deleteExpense(expense.id).subscribe(
 					data => {
 						console.log(data);

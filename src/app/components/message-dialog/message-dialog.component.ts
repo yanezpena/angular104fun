@@ -11,7 +11,6 @@ import {
 	styleUrls: ['./message-dialog.component.scss'],
 })
 export class MessageDialogComponent implements OnInit {
-	style: number;
 	title: string;
 	message: string;
 	information: string;
@@ -20,7 +19,10 @@ export class MessageDialogComponent implements OnInit {
 	iconType: string;
 
 	constructor(
-		public dialogRef: MatDialogRef<MessageDialogComponent>,
+		public dialogRef: MatDialogRef<
+			MessageDialogComponent,
+			MessageBoxResult
+		>,
 		@Inject(MAT_DIALOG_DATA) public data
 	) {}
 
@@ -30,23 +32,23 @@ export class MessageDialogComponent implements OnInit {
 		this.information = this.data.information;
 		this.button = this.data.button;
 		this.dialogRef.disableClose = this.data.allow_outside_click || false;
-		this.iconType = this.data.iconType || MessageIcon.Info;
+		this.iconType = this.data.iconType || MessageBoxIcon.Info;
 	}
 
 	onOk() {
-		this.dialogRef.close({ result: MessageResult.Ok });
+		this.dialogRef.close(MessageBoxResult.Ok);
 	}
 
 	onCancel() {
-		this.dialogRef.close({ result: MessageResult.Cancel });
+		this.dialogRef.close(MessageBoxResult.Cancel);
 	}
 
 	onYes() {
-		this.dialogRef.close({ result: MessageResult.Yes });
+		this.dialogRef.close(MessageBoxResult.Yes);
 	}
 
 	onNo() {
-		this.dialogRef.close({ result: MessageResult.No });
+		this.dialogRef.close(MessageBoxResult.No);
 	}
 }
 
@@ -58,7 +60,7 @@ export class MessageBox {
 		button?: MessageBoxButton,
 		information?: string,
 		allow_outside_click?: boolean,
-		iconType?: MessageIcon,
+		iconType?: MessageBoxIcon,
 		width?: string
 	) {
 		let data = {
@@ -71,7 +73,7 @@ export class MessageBox {
 					button !== MessageBoxButton.Ok
 						? true
 						: allow_outside_click || false,
-				iconType: iconType || MessageIcon.Info,
+				iconType: iconType || MessageBoxIcon.Info,
 			},
 			id: 'message-box',
 		};
@@ -87,14 +89,14 @@ export enum MessageBoxButton {
 	YesNo = 2,
 }
 
-export enum MessageResult {
+export enum MessageBoxResult {
 	Ok = 'ok',
 	Cancel = 'cancel',
 	Yes = 'yes',
 	No = 'no',
 }
 
-export enum MessageIcon {
+export enum MessageBoxIcon {
 	Info = 'info',
 	Question = 'question',
 	None = 'none',
