@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ExpenseService } from '../../../shared/services/expense.service';
@@ -7,14 +7,14 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Expense } from 'src/app/models/expense';
-import { ComponentCanDeactivate } from '../../../components/can-deactivate/can-deactivate.guard';
+import { CanDeactivateInterface } from '../../../components/can-deactivate/can-deactivate.interface';
 
 @Component({
 	selector: 'app-expense-form',
 	templateUrl: './expense-form.component.html',
 	styleUrls: ['./expense-form.component.scss'],
 })
-export class ExpenseFormComponent implements ComponentCanDeactivate {
+export class ExpenseFormComponent implements CanDeactivateInterface {
 	// constants
 	NAME_MAX_LEN = 250;
 
@@ -40,14 +40,13 @@ export class ExpenseFormComponent implements ComponentCanDeactivate {
 
 	// @HostListener allows us to also guard against browser refresh, close, etc.
 	@HostListener('window:beforeunload', ['$event'])
-	public onPageUnload($event: BeforeUnloadEvent) {
-		if (this.canDeactivate()) {
-			$event.returnValue = true;
+	beforeUnloadHandler(event: BeforeUnloadEvent) {
+		if (!this.canDeactivate()) {
+			event.returnValue = true;
 		}
 	}
 
 	canDeactivate(): boolean {
-		console.log('dirty', this.isFormTouched);
 		return !this.isFormTouched;
 	}
 
@@ -305,7 +304,6 @@ export class ExpenseFormComponent implements ComponentCanDeactivate {
 	}
 
 	onCancel() {
-		// clean form
 		this.backToExpenseList();
 	}
 
@@ -329,7 +327,8 @@ export class ExpenseFormComponent implements ComponentCanDeactivate {
 	// util functions
 
 	backToExpenseList() {
-		this.curForm.markAsUntouched();
+		// clean form
+		this.curForm.reset();
 		this.gotoExpenseList();
 	}
 
@@ -350,7 +349,7 @@ export class ExpenseFormComponent implements ComponentCanDeactivate {
 	}
 
 	get isFormTouched() {
-		return this.curForm.touched;
+		return this.curForm.touched || this.curForm.dirty;
 	}
 
 	gotoExpenseList() {

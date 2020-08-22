@@ -61,6 +61,6 @@
 	"unsaved_changes": "There are some unsaved modifications. Do you want to continue?",
 	"unsaved_changes_title": "Unsaved modifications",
 	"unsaved_changes_content": "What would you like to do?",
-	"stay_on_form": "STAY ON THE FORM",
-	"leave_without_saving": "LEAVE WITHOUT SAVING"
+	"stay_on_form": "STAY",
+	"leave_without_saving": "LEAVE"
 }

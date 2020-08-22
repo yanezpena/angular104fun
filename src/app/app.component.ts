@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { of, Observable } from 'rxjs';
-import { map, startWith, delay, switchMap, filter, tap } from 'rxjs/operators';
+import { map, startWith, delay, switchMap } from 'rxjs/operators';
 
 import { pokemons, swCharacters } from './data/data';
 import {
@@ -16,8 +16,7 @@ import { languages } from './data/languages';
 import { Language } from './models/language';
 
 import { TranslateService } from '@ngx-translate/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { CanDeactivateState } from './components/can-deactivate/can-deactivate.guard';
+import { Router } from '@angular/router';
 
 export interface IItem {
 	id?: number;
@@ -119,21 +118,6 @@ export class AppComponent {
 	constructor(public translate: TranslateService, readonly router: Router) {
 		// set 'en' as default language
 		translate.setDefaultLang('en');
-
-		// if the user clicks the back button, ask the CanDeactivateGuard to defend against this.
-		window.onpopstate = () =>
-			(CanDeactivateState.defendAgainstBrowserBackButton = true);
-
-		// Upon successful navigation, ensure that the CanDeactivateGuard no longer defends against back button clicks
-		router.events
-			.pipe(
-				filter(e => e instanceof NavigationEnd),
-				tap(
-					() =>
-						(CanDeactivateState.defendAgainstBrowserBackButton = true)
-				)
-			)
-			.subscribe();
 	}
 
 	ngOnInit() {}

@@ -61,6 +61,6 @@
 	"unsaved_changes": "There are some unsaved modifications. Do you want to continue?(FR)",
 	"unsaved_changes_title": "Unsaved modifications(FR)",
 	"unsaved_changes_content": "What would you like to do?(FR)",
-	"stay_on_form": "STAY ON THE FORM(FR)",
-	"leave_without_saving": "LEAVE WITHOUT SAVING(FR)"
+	"stay_on_form": "STAY(FR)",
+	"leave_without_saving": "LEAVE(FR)"
 }

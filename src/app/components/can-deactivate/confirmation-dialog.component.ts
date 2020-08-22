@@ -6,9 +6,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 	templateUrl: './confirmation-dialog.component.html',
 	styleUrls: ['./confirmation-dialog.component.scss'],
 })
-export class ConfirmationComponent {
+export class ConfirmationDialogComponent {
 	constructor(
-		private readonly dialogRef: MatDialogRef<ConfirmationComponent, boolean>
+		private readonly dialogRef: MatDialogRef<ConfirmationDialogComponent, boolean>
 	) {}
 
 	onClickCancel() {

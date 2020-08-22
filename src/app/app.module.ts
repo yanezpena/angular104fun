@@ -31,6 +31,9 @@ import { NotificationService } from './shared/services/notification.service';
 import { StateOptionService } from './shared/services/state-option.service';
 import { ExpenseService } from './shared/services/expense.service';
 
+// guards
+import { HasUnsavedChangesGuard } from './guards/has-unsaved-changes.guard';
+
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -72,6 +75,7 @@ import { ExpenseService } from './shared/services/expense.service';
 		NotificationService,
 		ExpenseService,
 		StateOptionService,
+		HasUnsavedChangesGuard,
 	],
 	bootstrap: [AppComponent],
 })

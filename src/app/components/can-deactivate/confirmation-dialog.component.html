@@ -24,21 +24,23 @@
 	</mat-card-content>
 	<!-- buttons -->
 	<mat-card-actions>
-		<button
-			mat-raised-button
-			color="primary"
-			(click)="onClickCancel()"
-			cdkFocusInitial
-		>
-			{{ 'stay_on_form' | translate }}
-		</button>
-		<button
-			mat-raised-button
-			class="confirm-button"
-			color="warn"
-			(click)="onClickConfirm()"
-		>
-			{{ 'leave_without_saving' | translate }}
-		</button>
+		<div fxLayout="row" fxLayoutAlign="space-around center">
+			<button
+				mat-raised-button
+				color="primary"
+				(click)="onClickCancel()"
+				cdkFocusInitial
+			>
+				{{ 'stay_on_form' | translate }}
+			</button>
+			<button
+				mat-raised-button
+				class="confirm-button"
+				color="warn"
+				(click)="onClickConfirm()"
+			>
+				{{ 'leave_without_saving' | translate }}
+			</button>
+		</div>
 	</mat-card-actions>
 </mat-card>

@@ -21,8 +21,7 @@ import { SearchInputComponent } from '../components/search-input/search-input.co
 // loading and spinning
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CanDeactivateGuard } from '../components/can-deactivate/can-deactivate.guard';
-import { ConfirmationComponent } from './can-deactivate/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './can-deactivate/confirmation-dialog.component';
 
 @NgModule({
 	declarations: [
@@ -31,7 +30,7 @@ import { ConfirmationComponent } from './can-deactivate/confirmation-dialog.comp
 		LoadingSpinnerComponent,
 		SmallButtonComponent,
 		MessageDialogComponent,
-		ConfirmationComponent,
+		ConfirmationDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
 		SearchInputComponent,
@@ -54,13 +53,13 @@ import { ConfirmationComponent } from './can-deactivate/confirmation-dialog.comp
 		LoadingSpinnerComponent,
 		SmallButtonComponent,
 		MessageDialogComponent,
-		ConfirmationComponent,
+		ConfirmationDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
 		SearchInputComponent,
 		// RichTextEditorComponent
 	],
-	providers: [TranslateService, CanDeactivateGuard],
-	entryComponents: [ConfirmationComponent],
+	providers: [TranslateService],
+	entryComponents: [ConfirmationDialogComponent],
 })
 export class ComponentModule {}
