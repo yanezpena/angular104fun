@@ -1,3 +1,4 @@
+<app-loading-spinner></app-loading-spinner>
 <mat-card>
 	<mat-card-title>
 		<div fxLayout="row">
@@ -183,7 +184,10 @@
 
 				<!-- Checkbox Column -->
 				<ng-container matColumnDef="select">
-					<mat-header-cell class="mat-header-cell-right" *matHeaderCellDef>
+					<mat-header-cell
+						class="mat-header-cell-right"
+						*matHeaderCellDef
+					>
 						<mat-checkbox
 							(change)="$event ? masterToggle() : null"
 							[checked]="selection.hasValue() && isAllSelected()"

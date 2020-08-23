@@ -22,6 +22,7 @@ import { SearchInputComponent } from '../components/search-input/search-input.co
 import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogComponent } from './can-deactivate/confirmation-dialog.component';
+import { LoadingService } from '../shared/services/loading.service';
 
 @NgModule({
 	declarations: [
@@ -59,7 +60,7 @@ import { ConfirmationDialogComponent } from './can-deactivate/confirmation-dialo
 		SearchInputComponent,
 		// RichTextEditorComponent
 	],
-	providers: [TranslateService],
+	providers: [TranslateService, LoadingService],
 	entryComponents: [ConfirmationDialogComponent],
 })
 export class ComponentModule {}

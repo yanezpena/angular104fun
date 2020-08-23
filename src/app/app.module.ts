@@ -24,7 +24,6 @@ import { DefaultModule } from './layouts/default/default.module';
 import { AppConfigService } from './shared/services/app-config.service';
 
 // loading and spining service
-import { LoadingService } from './shared/services/loading.service';
 import { NotificationService } from './shared/services/notification.service';
 
 // services
@@ -71,7 +70,6 @@ import { HasUnsavedChangesGuard } from './guards/has-unsaved-changes.guard';
 			deps: [AppConfigService],
 			multi: true,
 		},
-		LoadingService,
 		NotificationService,
 		ExpenseService,
 		StateOptionService,

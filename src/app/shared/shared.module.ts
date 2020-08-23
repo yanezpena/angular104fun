@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentModule } from '../components/components.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { LoadingSpinnerComponent } from '../components/loading-spinner/loading-spinner.component';
 
 @NgModule({
 	declarations: [HeaderComponent, FooterComponent, SidebarComponent],
@@ -18,6 +19,11 @@ import { AppRoutingModule } from '../app-routing.module';
 		ComponentModule,
 		AppRoutingModule,
 	],
-	exports: [HeaderComponent, FooterComponent, SidebarComponent],
+	exports: [
+		HeaderComponent,
+		FooterComponent,
+		SidebarComponent,
+		LoadingSpinnerComponent,
+	],
 })
 export class SharedModule {}

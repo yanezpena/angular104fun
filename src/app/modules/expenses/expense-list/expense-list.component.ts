@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Component({
 	selector: 'app-expense-list',
@@ -54,7 +55,8 @@ export class ExpenseListComponent implements OnInit {
 		private router: Router,
 		private expenseService: ExpenseService,
 		private notificationService: NotificationService,
-		private translateService: TranslateService
+		private translateService: TranslateService,
+		private loadingService: LoadingService
 	) {}
 
 	ngOnInit() {
@@ -90,8 +92,10 @@ export class ExpenseListComponent implements OnInit {
 
 	loadExpenses() {
 		console.log('loadExpenses');
-		this.expenseService
-			.getExpenses()
+
+		const expenses$ = this.expenseService.getExpenses();
+		this.loadingService
+			.showLoaderSpinnerUntilCompleted(expenses$)
 			.pipe(takeUntil(this.unsubcribe))
 			.subscribe(
 				expenseList => {

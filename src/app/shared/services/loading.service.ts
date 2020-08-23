@@ -10,7 +10,7 @@ export class LoadingService {
 
 	constructor() {}
 
-	showLoaderUntilCompleted<T>(obs$: Observable<T>): Observable<T> {
+	showLoaderSpinnerUntilCompleted<T>(obs$: Observable<T>): Observable<T> {
 		return of(null).pipe(
 			tap(() => this.loadingOn()),
 			concatMap(() => obs$),

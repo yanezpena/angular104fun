@@ -1,260 +1,247 @@
-<section>
-	<mat-card>
-		<mat-card-title>
-			<div fxLayout="row" fxLayout.sm="column">
-				{{ getTitle() | translate }}
-			</div>
-		</mat-card-title>
-		<mat-card-subtitle>
-			<span
-				><i>{{ getSubTitle() | translate }}</i></span
-			>
-		</mat-card-subtitle>
-		<mat-card-content class="mat-elevation-z8">
-			<form [formGroup]="curForm">
-				<div class="form-padding">
-					<!-- name field -->
-					<div fxLayout="row">
-						<mat-form-field fxFlex="grow" floatLabel="always">
-							<mat-label>{{ 'name' | translate }}</mat-label>
-							<input
-								matInput
-								placeholder="{{
-									'name_placeholder' | translate
-								}}"
-								type="text"
-								formControlName="name"
-								#name
-								required
-							/>
-							<button
-								mat-button
-								*ngIf="name.value"
-								matSuffix
-								mat-icon-button
-								(click)="name.value = ''"
-								matTooltip="Clear content"
-							>
-								<mat-icon>close</mat-icon>
-							</button>
-							<mat-error>
-								{{ 'name_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-					</div>
-
-					<!-- description field -->
-					<div fxLayout="row">
-						<mat-form-field fxFlex="grow" floatLabel="always">
-							<mat-label>{{
-								'description' | translate
-							}}</mat-label>
-							<textarea
-								matInput
-								mat-autosize
-								matAutosizeMinRows="5"
-								matAutosizeMaxRows="10"
-								placeholder="{{
-									'description_placeholder' | translate
-								}}"
-								type="text"
-								formControlName="description"
-								required
-							></textarea>
-							<mat-error>
-								{{ 'description_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-					</div>
-
-					<div
-						fxLayoutAlign="space-between center"
-						fxLayoutGap="20px"
-					>
-						<!-- state field -->
-						<mat-form-field fxFlex floatLabel="always">
-							<mat-label>{{ 'state' | translate }}</mat-label>
-							<mat-select formControlName="state" required>
-								<mat-option
-									*ngFor="let item of stateOptions"
-									[value]="item.id"
-									>{{ item.id | translate }}</mat-option
-								>
-							</mat-select>
-							<mat-error>
-								{{ 'state_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-
-						<!-- entryDate field -->
-						<mat-form-field fxFlex floatLabel="always">
-							<mat-label>{{ 'entryDate' | translate }}</mat-label>
-							<input
-								matInput
-								[ngxMatDatetimePicker]="picker"
-								placeholder="Choose a date"
-								formControlName="entryDate"
-								placeholder="{{
-									'entryDate_placeholder' | translate
-								}}"
-							/>
-							<mat-datepicker-toggle
-								matSuffix
-								[for]="picker"
-							></mat-datepicker-toggle>
-							<ngx-mat-datetime-picker
-								#picker
-								[showSpinners]="true"
-								[showSeconds]="false"
-								[stepHour]="1"
-								[stepMinute]="5"
-								[touchUi]="false"
-								[enableMeridian]="true"
-								[disableMinute]="false"
-								[hideTime]="false"
-							>
-							</ngx-mat-datetime-picker>
-							<mat-error>
-								{{ 'entryDate_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-					</div>
-
-					<!-- updateDate field -->
-
-					<div
-						fxLayoutAlign="space-between center"
-						fxLayoutGap="20px"
-					>
-						<!-- subtotal field -->
-						<mat-form-field fxFlex floatLabel="always">
-							<mat-label>{{ 'subtotal' | translate }}</mat-label>
-							<input
-								matInput
-								placeholder="{{
-									'subtotal_placeholder' | translate
-								}}"
-								type="number"
-								formControlName="subtotal"
-								required
-							/>
-							<mat-error>
-								{{ 'subtotal_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-
-						<!-- totalTax field -->
-						<mat-form-field fxFlex floatLabel="always">
-							<mat-label>{{ 'totalTax' | translate }}</mat-label>
-							<input
-								matInput
-								placeholder="{{
-									'totalTax_placeholder' | translate
-								}}"
-								type="number"
-								formControlName="totalTax"
-								required
-							/>
-							<mat-error>
-								{{ 'totalTax_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-
-						<!-- total field -->
-						<mat-form-field fxFlex floatLabel="always">
-							<mat-label>{{ 'total' | translate }}</mat-label>
-							<input
-								matInput
-								placeholder="{{
-									'total_placeholder' | translate
-								}}"
-								type="number"
-								formControlName="total"
-								required
-							/>
-							<mat-error>
-								{{ 'total_is_required' | translate }}
-							</mat-error>
-						</mat-form-field>
-					</div>
-
-					<!-- receipt - file -->
-					<div>
-						<div style="image-field">
-							<mat-label>Receipt</mat-label>
-						</div>
-						<!-- image preview -->
-						<div *ngIf="image">
-							<img
-								[src]="image"
-								width="10%"
-								height="10%"
-								matTooltip="{{
-									'upload_button_tooltip' | translate
-								}}"
-								(click)="inputFile.click()"
-							/>
-						</div>
-						<!-- image input file -->
+<app-loading-spinner></app-loading-spinner>
+<mat-card>
+	<mat-card-title>
+		<div fxLayout="row" fxLayout.sm="column">
+			{{ getTitle() | translate }}
+		</div>
+	</mat-card-title>
+	<mat-card-subtitle>
+		<span
+			><i>{{ getSubTitle() | translate }}</i></span
+		>
+	</mat-card-subtitle>
+	<mat-card-content class="mat-elevation-z8">
+		<form [formGroup]="curForm">
+			<div class="form-padding">
+				<!-- name field -->
+				<div fxLayout="row">
+					<mat-form-field fxFlex="grow" floatLabel="always">
+						<mat-label>{{ 'name' | translate }}</mat-label>
 						<input
-							#inputFile
-							hidden
-							type="file"
-							accept="image/*"
-							(change)="onFileSelected($event)"
-							formControlName="receipt"
+							matInput
+							placeholder="{{ 'name_placeholder' | translate }}"
+							type="text"
+							formControlName="name"
+							#name
+							required
 						/>
-						<!-- upload button -->
-						<app-icon-text-button
-							color="primary"
-							textTooltip="upload_button_tooltip"
-							[icon]="image ? 'attachment' : 'attach_file'"
-							text="upload_receipt"
-							(click)="inputFile.click()"
+						<button
+							mat-button
+							*ngIf="name.value"
+							matSuffix
+							mat-icon-button
+							(click)="name.value = ''"
+							matTooltip="Clear content"
 						>
-						</app-icon-text-button>
-						<app-icon-text-button
-							*ngIf="image"
-							textTooltip="detach_receipt_tooltip"
-							[icon]="'link_off'"
-							text="detach_receipt"
-							(click)="onDetach()"
-						>
-						</app-icon-text-button>
-					</div>
-
-					<!-- actions buttons -->
-					<div
-						fxLayoutAlign="start center"
-						fxLayoutGap="50px"
-						class="action-button-padding-top"
-					>
-						<app-icon-text-button
-							color="primary"
-							textTooltip="save_button_tooltip"
-							icon="save"
-							text="save"
-							(click)="onSave()"
-						>
-						</app-icon-text-button>
-						<app-icon-text-button
-							textTooltip="cancel_button_tooltip"
-							icon="cancel"
-							text="cancel"
-							(click)="onCancel()"
-						>
-						</app-icon-text-button>
-						<app-icon-text-button
-							textTooltip="approve_button_tooltip"
-							icon="thumb_up"
-							[ngIconClass]="'approve-small-button-color'"
-							text="approve"
-							(click)="onApprove()"
-						>
-						</app-icon-text-button>
-					</div>
+							<mat-icon>close</mat-icon>
+						</button>
+						<mat-error>
+							{{ 'name_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
 				</div>
-			</form>
-		</mat-card-content>
-	</mat-card>
-</section>
+
+				<!-- description field -->
+				<div fxLayout="row">
+					<mat-form-field fxFlex="grow" floatLabel="always">
+						<mat-label>{{ 'description' | translate }}</mat-label>
+						<textarea
+							matInput
+							mat-autosize
+							matAutosizeMinRows="5"
+							matAutosizeMaxRows="10"
+							placeholder="{{
+								'description_placeholder' | translate
+							}}"
+							type="text"
+							formControlName="description"
+							required
+						></textarea>
+						<mat-error>
+							{{ 'description_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div fxLayoutAlign="space-between center" fxLayoutGap="20px">
+					<!-- state field -->
+					<mat-form-field fxFlex floatLabel="always">
+						<mat-label>{{ 'state' | translate }}</mat-label>
+						<mat-select formControlName="state" required>
+							<mat-option
+								*ngFor="let item of stateOptions"
+								[value]="item.id"
+								>{{ item.id | translate }}</mat-option
+							>
+						</mat-select>
+						<mat-error>
+							{{ 'state_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+
+					<!-- entryDate field -->
+					<mat-form-field fxFlex floatLabel="always">
+						<mat-label>{{ 'entryDate' | translate }}</mat-label>
+						<input
+							matInput
+							[ngxMatDatetimePicker]="picker"
+							placeholder="Choose a date"
+							formControlName="entryDate"
+							placeholder="{{
+								'entryDate_placeholder' | translate
+							}}"
+						/>
+						<mat-datepicker-toggle
+							matSuffix
+							[for]="picker"
+						></mat-datepicker-toggle>
+						<ngx-mat-datetime-picker
+							#picker
+							[showSpinners]="true"
+							[showSeconds]="false"
+							[stepHour]="1"
+							[stepMinute]="5"
+							[touchUi]="false"
+							[enableMeridian]="true"
+							[disableMinute]="false"
+							[hideTime]="false"
+						>
+						</ngx-mat-datetime-picker>
+						<mat-error>
+							{{ 'entryDate_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<!-- updateDate field -->
+
+				<div fxLayoutAlign="space-between center" fxLayoutGap="20px">
+					<!-- subtotal field -->
+					<mat-form-field fxFlex floatLabel="always">
+						<mat-label>{{ 'subtotal' | translate }}</mat-label>
+						<input
+							matInput
+							placeholder="{{
+								'subtotal_placeholder' | translate
+							}}"
+							type="number"
+							formControlName="subtotal"
+							required
+						/>
+						<mat-error>
+							{{ 'subtotal_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+
+					<!-- totalTax field -->
+					<mat-form-field fxFlex floatLabel="always">
+						<mat-label>{{ 'totalTax' | translate }}</mat-label>
+						<input
+							matInput
+							placeholder="{{
+								'totalTax_placeholder' | translate
+							}}"
+							type="number"
+							formControlName="totalTax"
+							required
+						/>
+						<mat-error>
+							{{ 'totalTax_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+
+					<!-- total field -->
+					<mat-form-field fxFlex floatLabel="always">
+						<mat-label>{{ 'total' | translate }}</mat-label>
+						<input
+							matInput
+							placeholder="{{ 'total_placeholder' | translate }}"
+							type="number"
+							formControlName="total"
+							required
+						/>
+						<mat-error>
+							{{ 'total_is_required' | translate }}
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<!-- receipt - file -->
+				<div>
+					<div style="image-field">
+						<mat-label>Receipt</mat-label>
+					</div>
+					<!-- image preview -->
+					<div *ngIf="image">
+						<img
+							[src]="image"
+							width="10%"
+							height="10%"
+							matTooltip="{{
+								'upload_button_tooltip' | translate
+							}}"
+							(click)="inputFile.click()"
+						/>
+					</div>
+					<!-- image input file -->
+					<input
+						#inputFile
+						hidden
+						type="file"
+						accept="image/*"
+						(change)="onFileSelected($event)"
+						formControlName="receipt"
+					/>
+					<!-- upload button -->
+					<app-icon-text-button
+						color="primary"
+						textTooltip="upload_button_tooltip"
+						[icon]="image ? 'attachment' : 'attach_file'"
+						text="upload_receipt"
+						(click)="inputFile.click()"
+					>
+					</app-icon-text-button>
+					<app-icon-text-button
+						*ngIf="image"
+						textTooltip="detach_receipt_tooltip"
+						[icon]="'link_off'"
+						text="detach_receipt"
+						(click)="onDetach()"
+					>
+					</app-icon-text-button>
+				</div>
+
+				<!-- actions buttons -->
+				<div
+					fxLayoutAlign="start center"
+					fxLayoutGap="50px"
+					class="action-button-padding-top"
+				>
+					<app-icon-text-button
+						color="primary"
+						textTooltip="save_button_tooltip"
+						icon="save"
+						text="save"
+						(click)="onSave()"
+					>
+					</app-icon-text-button>
+					<app-icon-text-button
+						textTooltip="cancel_button_tooltip"
+						icon="cancel"
+						text="cancel"
+						(click)="onCancel()"
+					>
+					</app-icon-text-button>
+					<app-icon-text-button
+						textTooltip="approve_button_tooltip"
+						icon="thumb_up"
+						[ngIconClass]="'approve-small-button-color'"
+						text="approve"
+						(click)="onApprove()"
+					>
+					</app-icon-text-button>
+				</div>
+			</div>
+		</form>
+	</mat-card-content>
+</mat-card>
