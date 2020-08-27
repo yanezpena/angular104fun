@@ -1,0 +1,11 @@
+<!-- image preview -->
+<div class="container">
+	<img [src]="image" (click)="onImageClick()" />
+	<app-small-button
+		*ngIf="image"
+		ngClass="btn"
+		imageCaption="close"
+		[matTooltip]="toolTipMessage"
+		(click)="onDetach($event)"
+	></app-small-button>
+</div>

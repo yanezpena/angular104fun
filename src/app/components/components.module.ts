@@ -15,6 +15,7 @@ import { MessageDialogComponent } from '../components/message-dialog/message-dia
 import { StateFieldComponent } from '../components/state-field/state-field.component';
 import { IconTextButtonComponent } from '../components/icon-text-button/icon-text-button.component';
 import { SearchInputComponent } from '../components/search-input/search-input.component';
+import { ImagePreviewComponent } from '../components/image-preview/image-preview.component';
 
 // import { RichTextEditorComponent } from '../components/rich-text-editor/rich-text-editor.component';
 
@@ -35,6 +36,7 @@ import { LoadingService } from '../shared/services/loading.service';
 		StateFieldComponent,
 		IconTextButtonComponent,
 		SearchInputComponent,
+		ImagePreviewComponent,
 		// RichTextEditorComponent
 	],
 	imports: [
@@ -57,6 +59,7 @@ import { LoadingService } from '../shared/services/loading.service';
 		ConfirmationDialogComponent,
 		StateFieldComponent,
 		IconTextButtonComponent,
+		ImagePreviewComponent,
 		SearchInputComponent,
 		// RichTextEditorComponent
 	],

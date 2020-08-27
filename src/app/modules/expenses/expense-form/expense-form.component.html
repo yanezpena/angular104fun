@@ -183,6 +183,14 @@
 							(click)="inputFile.click()"
 						/>
 					</div>
+					<app-image-preview
+						[image]="image"
+						(detach)="onDetach()"
+						(imageClick)="inputFile.click()"
+						toolTipMessage="{{
+							'detach_receipt_tooltip' | translate
+						}}"
+					></app-image-preview>
 					<!-- image input file -->
 					<input
 						#inputFile
