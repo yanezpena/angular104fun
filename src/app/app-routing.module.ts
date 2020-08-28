@@ -4,7 +4,6 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ExpenseListComponent } from './modules/expenses/expense-list/expense-list.component';
 import { ExpenseFormComponent } from './modules/expenses/expense-form/expense-form.component';
-// import { CanDeactivateGuard } from './components/can-deactivate/can-deactivate.guard';
 import { HasUnsavedChangesGuard } from './guards/has-unsaved-changes.guard';
 
 const routes: Routes = [

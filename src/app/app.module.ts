@@ -23,7 +23,7 @@ import { DefaultModule } from './layouts/default/default.module';
 // app config service
 import { AppConfigService } from './shared/services/app-config.service';
 
-// loading and spining service
+// loading and spinning service
 import { NotificationService } from './shared/services/notification.service';
 
 // services
