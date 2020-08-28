@@ -6,9 +6,18 @@
 		height: $footer-height;
 	}
 
+	.mat-toolbar,
+	.mat-toolbar-row,
+	.mat-toolbar-single-row {
+		height: 45px;
+		min-height: 45px;
+	}
+
 	.mat-toolbar {
 		p {
 			font-size: $standard-font-size;
+			margin-top: 0px;
+			margin-bottom: 0px;
 		}
 
 		a {
