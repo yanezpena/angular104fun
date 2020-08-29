@@ -208,7 +208,9 @@
 				</ng-container>
 
 				<!-- header row - column names -->
-				<mat-header-row *matHeaderRowDef="displayedColumns">
+				<mat-header-row
+					*matHeaderRowDef="displayedColumns; sticky: true"
+				>
 				</mat-header-row>
 				<mat-row
 					*matRowDef="let row; columns: displayedColumns"
