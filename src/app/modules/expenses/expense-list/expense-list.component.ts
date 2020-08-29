@@ -172,6 +172,10 @@ export class ExpenseListComponent implements OnInit {
 		console.log('attachImage', selectedFile);
 	}
 
+	multiRemove() {}
+
+	multiApprove() {}
+
 	// select checkbox
 
 	/** Whether the number of selected elements matches the total number of rows. */

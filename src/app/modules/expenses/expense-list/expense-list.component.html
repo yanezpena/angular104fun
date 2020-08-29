@@ -17,6 +17,26 @@
 					[ngClass]="'add-small-button-color'"
 					(click)="add()"
 				></app-small-button>
+				<!-- delete button -->
+				<app-small-button
+					*ngIf="selection.selected.length > 0"
+					imageCaption="delete"
+					toolTipMessage="{{
+						'selected_delete_button_tooltip' | translate
+					}}"
+					[ngClass]="'delete-small-button-color'"
+					(click)="multiRemove()"
+				></app-small-button>
+				<!-- approve button -->
+				<app-small-button
+					*ngIf="selection.selected.length > 0"
+					imageCaption="thumb_up"
+					toolTipMessage="{{
+						'selected_approve_button_tooltip' | translate
+					}}"
+					[ngClass]="'approve-small-button-color'"
+					(click)="multiApprove()"
+				></app-small-button>
 				<!-- refresh button -->
 				<app-small-button
 					imageCaption="refresh"
