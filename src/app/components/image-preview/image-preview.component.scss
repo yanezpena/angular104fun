@@ -1,26 +1,30 @@
 /* container needed to position the button, adjust the width as needed */
-.container {
+.img-container {
 	position: relative;
 	width: 50%;
 }
 
 /* make the image responsive */
-.container img {
+.img-container img {
 	width: 50%;
-	height: auto;
+	height: 50%;
 }
 
 /* style the button and place it in the right left corner of the container/image */
-.container .btn {
+.detach-btn {
 	position: absolute;
-	top: 5%;
-	left: 47%;
+	top: 7%;
+	left: 45%;
 	background-color: rgb(20, 20, 20);
 	border-radius: 50%;
 	transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
+	line-height: normal !important;
 }
 
-.container .btn:hover {
+.detach-btn:hover {
 	background-color: rgb(75, 75, 75);
+}
+
+::ng-deep .mat-icon-button {
+	line-height: normal;
 }
