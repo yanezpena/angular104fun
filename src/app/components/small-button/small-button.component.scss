@@ -1,5 +1,11 @@
 @import '../../../assets/css/variables.scss';
 
-.btn-small {
-	padding: 10px;
+.mat-icon-button.smaller {
+	line-height: normal;
+	width: 30px;
+	height: 30px;
+
+	.mat-icon {
+		font-size: 14px;
+	}
 }

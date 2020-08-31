@@ -38,13 +38,23 @@ export class SmallButtonComponent implements OnInit {
 
 	// input image caption property
 	@Input()
-	get ngClass() {
-		return this._ngClass;
+	get ngClassMatIcon() {
+		return this._ngClassMatIcon;
 	}
-	set ngClass(ngClass) {
-		this._ngClass = ngClass;
+	set ngClassMatIcon(ngClassMatIcon) {
+		this._ngClassMatIcon = ngClassMatIcon;
 	}
-	public _ngClass = '';
+	public _ngClassMatIcon = '';
+
+	// input button property
+	@Input()
+	get ngClassMatIconButton() {
+		return this._ngClassMatIconButton;
+	}
+	set ngClassMatIconButton(ngClassMatIconButton) {
+		this._ngClassMatIconButton = ngClassMatIconButton;
+	}
+	public _ngClassMatIconButton = '';
 
 	constructor() {}
 

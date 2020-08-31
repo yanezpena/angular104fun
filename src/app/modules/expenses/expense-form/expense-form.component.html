@@ -172,17 +172,6 @@
 						<mat-label>Receipt</mat-label>
 					</div>
 					<!-- image preview -->
-					<div *ngIf="image">
-						<img
-							[src]="image"
-							width="10%"
-							height="10%"
-							matTooltip="{{
-								'upload_button_tooltip' | translate
-							}}"
-							(click)="inputFile.click()"
-						/>
-					</div>
 					<app-image-preview
 						[image]="image"
 						(detach)="onDetach()"

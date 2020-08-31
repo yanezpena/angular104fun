@@ -1,3 +1,7 @@
-<button mat-icon-button [matTooltip]="toolTipMessage">
-	<mat-icon [ngClass]="ngClass">{{ imageCaption }}</mat-icon>
+<button
+	mat-icon-button
+	[ngClass]="ngClassMatIconButton"
+	[matTooltip]="toolTipMessage"
+>
+	<mat-icon [ngClass]="ngClassMatIcon">{{ imageCaption }}</mat-icon>
 </button>

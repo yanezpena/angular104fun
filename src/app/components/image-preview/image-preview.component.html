@@ -1,9 +1,10 @@
 <!-- image preview -->
 <div class="img-container">
-	<img [src]="image" (click)="onImageClick()" />
+	<img *ngIf="image" [src]="image" (click)="onImageClick()" />
 	<app-small-button
-		class="detach-btn"
 		*ngIf="image"
+		class="detach-btn"
+		[ngClassMatIconButton]="{ smaller: true }"
 		imageCaption="close"
 		[matTooltip]="toolTipMessage"
 		(click)="onDetach($event)"

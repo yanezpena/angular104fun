@@ -13,7 +13,7 @@
 /* style the button and place it in the right left corner of the container/image */
 .detach-btn {
 	position: absolute;
-	top: 7%;
+	top: 15px;
 	left: 45%;
 	background-color: rgb(20, 20, 20);
 	border-radius: 50%;
@@ -23,8 +23,4 @@
 
 .detach-btn:hover {
 	background-color: rgb(75, 75, 75);
-}
-
-::ng-deep .mat-icon-button {
-	line-height: normal;
 }
