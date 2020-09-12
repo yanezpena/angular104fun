@@ -11,30 +11,43 @@
 
 		<!-- left icons and menu -->
 		<div fxFlex fxLayoutAlign="end center">
-			<button mat-icon-button>
+			<!-- notifications -->
+			<button mat-icon-button [matTooltip]="'Notifications' | translate">
 				<mat-icon
 					[matBadge]="numberOfNotifications"
 					matBadgeColor="warn"
-					>notifications</mat-icon
-				>
+					>notifications
+				</mat-icon>
 			</button>
-			<button mat-icon-button matTooltip="Log In">
-				<mat-icon>person</mat-icon>
-			</button>
-			<button mat-icon-button matTooltip="Sign In">
-				<mat-icon>person_add</mat-icon>
-			</button>
-
-			<button mat-icon-button>
-				<mat-icon>favorite</mat-icon>
-			</button>
-			<button mat-icon-button>
-				<mat-icon>share</mat-icon>
-			</button>
+			<!-- login -->
+			<app-small-button
+				imageCaption="person"
+				toolTipMessage="{{ 'Log In' | translate }}"
+			></app-small-button>
+			<!-- sign in -->
+			<app-small-button
+				imageCaption="person_add"
+				toolTipMessage="{{ 'Sign In' | translate }}"
+			></app-small-button>
+			<!-- favorites -->
+			<app-small-button
+				imageCaption="favorites"
+				toolTipMessage="{{ 'Add To Favorites' | translate }}"
+			></app-small-button>
+			<!-- shared -->
+			<app-small-button
+				imageCaption="share"
+				toolTipMessage="{{ 'Shared' | translate }}"
+			></app-small-button>
+			<!-- language -->
 			<app-select-language
 				(languageChanged)="onLanguageChange($event)"
 			></app-select-language>
-			<button mat-icon-button [matMenuTriggerFor]="menu">
+			<button
+				mat-icon-button
+				[matTooltip]="'More Options' | translate"
+				[matMenuTriggerFor]="menu"
+			>
 				<mat-icon>more_vert</mat-icon>
 			</button>
 			<!-- more items menu -->
