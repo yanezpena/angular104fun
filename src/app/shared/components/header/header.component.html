@@ -12,7 +12,11 @@
 		<!-- left icons and menu -->
 		<div fxFlex fxLayoutAlign="end center">
 			<!-- notifications -->
-			<button mat-icon-button [matTooltip]="'Notifications' | translate">
+			<button
+				mat-icon-button
+				[matTooltip]="'Notifications' | translate"
+				class="button-padding-right"
+			>
 				<mat-icon
 					[matBadge]="numberOfNotifications"
 					matBadgeColor="warn"
@@ -23,21 +27,25 @@
 			<app-small-button
 				imageCaption="person"
 				toolTipMessage="{{ 'Log In' | translate }}"
+				class="button-padding-right"
 			></app-small-button>
 			<!-- sign in -->
 			<app-small-button
 				imageCaption="person_add"
 				toolTipMessage="{{ 'Sign In' | translate }}"
+				class="button-padding-right"
 			></app-small-button>
 			<!-- favorites -->
 			<app-small-button
 				imageCaption="favorites"
 				toolTipMessage="{{ 'Add To Favorites' | translate }}"
+				class="button-padding-right"
 			></app-small-button>
 			<!-- shared -->
 			<app-small-button
 				imageCaption="share"
 				toolTipMessage="{{ 'Shared' | translate }}"
+				class="button-padding-right"
 			></app-small-button>
 			<!-- language -->
 			<app-select-language
