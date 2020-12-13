@@ -27,7 +27,7 @@
 	"delete_button_tooltip": "Delete Expense(FR)",
 	"selected_delete_button_tooltip": "Delete Selected Expense(FR)",
 	"approve_button_tooltip": "Approve Expense(FR)",
-	"selected_approve_button_tooltip": "Approve Selected Expense(FR)",	
+	"selected_approve_button_tooltip": "Approve Selected Expense(FR)",
 	"save_button_tooltip": "Save Expense(FR)",
 	"cancel_button_tooltip": "Cancel changes(FR)",
 	"update_expense_subtitle": "Update expense. Use description to relate the expense to place(FR)",
@@ -64,5 +64,6 @@
 	"unsaved_changes_title": "Unsaved modifications(FR)",
 	"unsaved_changes_content": "What would you like to do?(FR)",
 	"stay_on_form": "STAY(FR)",
-	"leave_without_saving": "LEAVE(FR)"
+	"leave_without_saving": "LEAVE(FR)",
+	"menu_expenses": "Expenses(FR)"
 }

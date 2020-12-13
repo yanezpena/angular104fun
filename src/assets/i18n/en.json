@@ -64,5 +64,6 @@
 	"unsaved_changes_title": "Unsaved modifications",
 	"unsaved_changes_content": "What would you like to do?",
 	"stay_on_form": "STAY",
-	"leave_without_saving": "LEAVE"
+	"leave_without_saving": "LEAVE",
+	"menu_expenses": "Expenses"
 }

@@ -64,5 +64,6 @@
 	"unsaved_changes_title": "Modificaciones sin guardar",
 	"unsaved_changes_content": "Que desea hacer?",
 	"stay_on_form": "NO PERDER LAS MODIFICACIONES",
-	"leave_without_saving": "PERDER LAS MODIFICACIONES"
+	"leave_without_saving": "PERDER LAS MODIFICACIONES",
+	"menu_expenses": "Gastos"
 }
