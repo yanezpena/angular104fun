@@ -23,6 +23,8 @@ export class LoadingService {
 	}
 
 	loadingOff() {
-		this.loadingSubject.next(false);
+		setTimeout(() => {
+			this.loadingSubject.next(false);
+		}, 500);
 	}
 }
