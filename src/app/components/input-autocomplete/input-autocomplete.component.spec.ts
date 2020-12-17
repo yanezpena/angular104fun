@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InputAutocompleteComponent } from './input-autocomplete.component';
 
@@ -6,7 +6,7 @@ describe('InputAutocompleteComponent', () => {
   let component: InputAutocompleteComponent;
   let fixture: ComponentFixture<InputAutocompleteComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ InputAutocompleteComponent ]
     })
